@@ -9,12 +9,28 @@ A field reference for wood-destroying insect (WDI) inspectors, served as one pub
 - **Field ID guide** comparing the damage types side by side, **questions to ask** the
   homeowner, **knockout factors**, and an **FAQ**.
 
-No accounts, no database and no API keys — it's a static page.
+The site is private: visitors enter a shared access code before they can see anything.
+No accounts, no database and no API keys.
 
 ## How it works
 
 The page is a static file, `public/field-kit.html`, served at `/` by a rewrite in
 `next.config.ts`.
+
+`src/proxy.ts` checks every request, including the photos, for an access cookie. Without
+it, visitors are sent to `/unlock` to enter the code. The correct code sets a cookie for
+30 days. The cookie holds a hash of the code, so changing `SITE_ACCESS_CODE` signs
+everyone out and they need the new code. Wrong guesses are limited to 10 per 10 minutes
+per visitor (best effort; counted per server instance).
+
+If `SITE_ACCESS_CODE` isn't set, the site stays locked and the unlock page says the code
+hasn't been set up.
+
+### Environment variables
+
+| Variable | Required | Description |
+| --- | --- | --- |
+| `SITE_ACCESS_CODE` | Yes | The code people enter to open the site. Share it only with the people who should see the site. Change it to cut off everyone who had the old one. |
 
 ## Adding or changing photos
 
@@ -39,12 +55,13 @@ The FAQ, field ID guide, questions and knockout factors are plain HTML in
 
 ```bash
 npm install
-npm run dev
+SITE_ACCESS_CODE=your-code npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
 
 ## Deployment
 
-Deploys to Vercel (or any Node host) with no configuration: import the repository as a
-new project and deploy.
+Deploys to Vercel (or any Node host): import the repository as a new project, add
+`SITE_ACCESS_CODE` under Settings → Environment Variables, and deploy. After changing the
+variable, redeploy for it to take effect.
