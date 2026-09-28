@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>WDI Field Kit</title>
-<meta name="description" content="Field reference for wood-destroying insect inspectors, with a photo check for termite, carpenter ant and water damage.">
+<meta name="description" content="Field reference for wood-destroying insect inspectors: example photos of termite, carpenter ant, wood rot and wood-boring beetle damage, plus an ID guide, homeowner questions, knockout factors and FAQ.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -13,7 +13,7 @@
   --bg:#F3F4F0; --surface:#FFFFFF; --sunk:#E8EAE3; --ink:#1C2420; --ink-2:#4A5650; --line:#CDD2C8;
   --accent:#2F6A4A; --accent-ink:#FFFFFF; --accent-soft:#DDEBE2;
   --warn:#9A5B00; --warn-soft:#F7E8CC; --stop:#A8322A; --stop-soft:#F6DEDA;
-  --termite:#A8322A; --ant:#6B4AA0; --water:#1F6391; --other:#6A6F66;
+  --termite:#A8322A; --ant:#6B4AA0; --water:#1F6391; --beetle:#8A6414; --other:#6A6F66;
   --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
   --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
@@ -24,7 +24,7 @@
     --bg:#141A17; --surface:#1C2420; --sunk:#232C27; --ink:#E6EBE6; --ink-2:#A6B2AA; --line:#34403A;
     --accent:#6FBE8F; --accent-ink:#0E1A13; --accent-soft:#1F3A2B;
     --warn:#E3A43B; --warn-soft:#3A2C12; --stop:#F07C70; --stop-soft:#3D1F1C;
-    --termite:#F07C70; --ant:#B79BE8; --water:#6DB3E3; --other:#A6B2AA;
+    --termite:#F07C70; --ant:#B79BE8; --water:#6DB3E3; --beetle:#D9AE55; --other:#A6B2AA;
   }
 }
 :root[data-theme="dark"]{
@@ -32,7 +32,7 @@
   --bg:#141A17; --surface:#1C2420; --sunk:#232C27; --ink:#E6EBE6; --ink-2:#A6B2AA; --line:#34403A;
   --accent:#6FBE8F; --accent-ink:#0E1A13; --accent-soft:#1F3A2B;
   --warn:#E3A43B; --warn-soft:#3A2C12; --stop:#F07C70; --stop-soft:#3D1F1C;
-  --termite:#F07C70; --ant:#B79BE8; --water:#6DB3E3; --other:#A6B2AA;
+  --termite:#F07C70; --ant:#B79BE8; --water:#6DB3E3; --beetle:#D9AE55; --other:#A6B2AA;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -60,53 +60,39 @@ nav.tabs a:focus-visible,button:focus-visible,input:focus-visible,select:focus-v
 section.block{padding-block:40px 8px;display:grid;grid-template-columns:minmax(0,1fr);gap:18px;scroll-margin-top:60px}
 section.block > .head{display:grid;gap:6px;max-width:70ch}
 
-/* Photo check */
-.check{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:20px;align-items:start}
-@media (max-width:820px){.check{grid-template-columns:1fr}}
+/* Gallery */
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:14px}
-label.drop{display:grid;place-items:center;gap:6px;text-align:center;border:1.5px dashed var(--line);border-radius:8px;padding:22px 14px;cursor:pointer;background:var(--sunk)}
-label.drop.over{border-color:var(--accent);background:var(--accent-soft)}
-label.drop input{position:absolute;opacity:0;width:1px;height:1px}
-.drop strong{font-family:var(--f-display);font-size:20px;font-weight:600}
-.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
-.thumbs figure{margin:0;position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;background:var(--sunk);max-width:100%}
-.thumbs img{width:100%;height:100%;object-fit:cover;display:block}
-.thumbs button{position:absolute;top:4px;right:4px;border:0;border-radius:4px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;padding:2px 6px;cursor:pointer}
-.field{display:grid;gap:5px}
-.field > span{font-size:13px;font-weight:600}
-select,input[type=text],input[type=number],textarea{width:100%;font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px}
-textarea{min-height:64px;resize:vertical}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips label{display:inline-flex;align-items:center;gap:6px;font-size:13px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;background:var(--surface)}
-.chips input{accent-color:var(--accent)}
 .actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-button.primary,button.ghost{font:inherit;font-weight:600;border-radius:6px;padding:10px 16px;cursor:pointer;border:1px solid transparent}
-button.primary{background:var(--accent);color:var(--accent-ink)}
-button.primary:disabled{opacity:.5;cursor:not-allowed}
-button.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+button.ghost{font:inherit;font-weight:600;border-radius:6px;padding:10px 16px;cursor:pointer;background:transparent;color:var(--ink);border:1px solid var(--line)}
 .note{font-size:13px;color:var(--ink-2)}
-.note.err{color:var(--stop)}
-
-.result{display:grid;gap:14px}
-.tag{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:var(--warn-soft);color:var(--warn)}
-.verdict{display:grid;gap:4px;padding-left:12px;border-left:4px solid var(--vc,var(--accent))}
-.verdict .call{font-family:var(--f-display);font-size:30px;font-weight:700;line-height:1.05}
-.bars{display:grid;gap:8px}
-.bar{display:grid;grid-template-columns:130px 1fr 44px;gap:10px;align-items:center;font-size:13px}
-.bar .track{height:10px;background:var(--sunk);border-radius:5px;overflow:hidden}
-.bar .fill{height:100%;border-radius:5px;background:var(--c)}
-.bar .pct{font-family:var(--f-mono);text-align:right;font-variant-numeric:tabular-nums}
-.result ul{margin:0;padding-left:18px;display:grid;gap:4px}
-.result h4{margin:0;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
-.disclaimer{font-size:12.5px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:10px}
+.jump{display:flex;flex-wrap:wrap;gap:8px}
+.jump a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:var(--surface)}
+.jump a:hover{border-color:var(--c)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c)}
+.gtype{display:grid;gap:12px;scroll-margin-top:70px}
+.gtype > header{display:grid;gap:4px;max-width:70ch}
+.gtype > header h3{display:flex;align-items:center;gap:10px}
+.gtype > header h3 .dot{width:12px;height:12px}
+.gtype > header p{color:var(--ink-2);font-size:14.5px}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.shot{margin:0;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:10px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.shot .frame{aspect-ratio:4/3;background:var(--sunk);position:relative;max-width:100%}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.shot .frame .missing{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:12px;font-family:var(--f-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-2)}
+.shot figcaption{padding:12px 14px 14px;display:grid;gap:6px;align-content:start}
+.shot figcaption strong{font-family:var(--f-display);font-size:19px;font-weight:600;line-height:1.15}
+.shot figcaption p{font-size:14px}
+.shot figcaption .look{color:var(--ink-2)}
+.shot figcaption .credit:empty{display:none}
+.shot figcaption .credit{font-size:11.5px;color:var(--ink-2)}
 
 /* Field ID table */
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+table{border-collapse:collapse;width:100%;min-width:900px;font-size:14px}
 th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
 tr:last-child td{border-bottom:0}
 thead th{font-family:var(--f-display);font-size:17px;font-weight:600;background:var(--sunk)}
-thead th .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:var(--c)}
+thead th .dot{margin-right:6px}
 tbody th{font-weight:600;font-size:13px;color:var(--ink-2);width:130px}
 
 .lookalike{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
@@ -152,13 +138,13 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
   <header class="top">
     <span class="eyebrow">Wood-destroying insect inspection · field reference</span>
     <h1>WDI Field Kit</h1>
-    <p class="lede">A pocket reference for inspectors: a photo check for termite, carpenter ant and water damage, a side-by-side ID guide, questions to ask the homeowner, knockout factors and common questions.</p>
+    <p class="lede">A pocket reference for inspectors: example photos of termite, carpenter ant, wood rot and wood-boring beetle damage, a side-by-side ID guide, questions to ask the homeowner, knockout factors and common questions.</p>
   </header>
 </div>
 
 <nav class="tabs" aria-label="Sections">
   <div class="wrap">
-    <a href="#photo">Photo check</a>
+    <a href="#gallery">Damage photos</a>
     <a href="#id">Field ID</a>
     <a href="#questions">Questions to ask</a>
     <a href="#knockouts">Knockout factors</a>
@@ -168,68 +154,90 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
 
 <main class="wrap">
 
-<!-- PHOTO CHECK -->
-<section class="block" id="photo">
+<!-- GALLERY -->
+<section class="block" id="gallery">
   <div class="head">
-    <span class="eyebrow">Step 1</span>
-    <h2>Photo check</h2>
-    <p class="muted">Upload close-ups of the damage, frass, tubes or insects. Put a coin or tape measure in the shot so size is clear. The answers you add below help the read.</p>
+    <span class="eyebrow">Compare what you see</span>
+    <h2>Damage photos</h2>
+    <p class="muted">Example photos of each type of damage, with what to look for. Compare them with what you find on site.</p>
   </div>
-  <div class="check">
-    <form class="panel" id="checkForm" novalidate>
-      <label class="drop" id="drop" for="photos">
-        <input type="file" id="photos" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
-        <strong>Add photos</strong>
-        <span class="note" id="dropNote">Tap to choose, or drop images here. Up to 4 photos.</span>
-      </label>
-      <div class="thumbs" id="thumbs"></div>
+  <nav class="jump" aria-label="Damage types">
+    <a href="#termites" style="--c:var(--termite)"><span class="dot"></span>Termites</a>
+    <a href="#ants" style="--c:var(--ant)"><span class="dot"></span>Carpenter ants</a>
+    <a href="#rot" style="--c:var(--water)"><span class="dot"></span>Wood rot</a>
+    <a href="#beetles" style="--c:var(--beetle)"><span class="dot"></span>Wood-boring beetles</a>
+  </nav>
 
-      <label class="field"><span>Where in the structure</span>
-        <select id="loc">
-          <option value="">Not specified</option>
-          <option>Crawlspace / sill plate / joists</option>
-          <option>Basement</option>
-          <option>Slab / garage / foundation wall</option>
-          <option>Exterior trim / siding / deck</option>
-          <option>Window or door frame</option>
-          <option>Attic / roof framing</option>
-          <option>Interior wall / baseboard / floor</option>
-          <option>Bathroom / kitchen / near plumbing</option>
-        </select>
-      </label>
+  <div class="gtype" id="termites">
+    <header><h3><span class="dot" style="--c:var(--termite)"></span>Termites</h3><p>Subterranean termites travel in mud tubes and leave soil in their galleries. Drywood termites live inside dry wood and push out hard pellets.</p></header>
+    <div class="shots">
+      <figure class="shot" style="--c:var(--termite)">
+        <div class="frame"><img src="/gallery/termite-mud-tubes.jpg" alt="Mud tubes on a foundation" loading="lazy"></div>
+        <figcaption><strong>Mud tubes on a foundation</strong><p class="look">Pencil-width tubes of soil running up concrete, block or piers to the wood above.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--termite)">
+        <div class="frame"><img src="/gallery/termite-galleries.jpg" alt="Subterranean termite galleries" loading="lazy"></div>
+        <figcaption><strong>Subterranean termite galleries</strong><p class="look">Wood eaten along the grain in layers, with soil and mud plastered on the gallery walls.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--termite)">
+        <div class="frame"><img src="/gallery/drywood-termite-pellets.jpg" alt="Drywood termite pellets" loading="lazy"></div>
+        <figcaption><strong>Drywood termite pellets</strong><p class="look">Small, hard, six-sided pellets piled below tiny kick-out holes.</p><p class="credit"></p></figcaption>
+      </figure>
+    </div>
+  </div>
 
-      <div class="field"><span>Also observed on site</span>
-        <div class="chips" id="obs">
-          <label><input type="checkbox" value="mud tubes"> Mud tubes</label>
-          <label><input type="checkbox" value="pellet-shaped frass"> Pellet frass</label>
-          <label><input type="checkbox" value="sawdust-like frass with insect parts"> Sawdust frass</label>
-          <label><input type="checkbox" value="fine flour-like powder"> Fine powder</label>
-          <label><input type="checkbox" value="discarded wings"> Loose wings</label>
-          <label><input type="checkbox" value="live insects seen"> Live insects</label>
-          <label><input type="checkbox" value="small round exit holes"> Round exit holes</label>
-          <label><input type="checkbox" value="soft or spongy wood"> Soft wood</label>
-          <label><input type="checkbox" value="staining, mold or musty odor"> Staining / mold</label>
-          <label><input type="checkbox" value="hollow sound when tapped"> Sounds hollow</label>
-        </div>
-      </div>
+  <div class="gtype" id="ants">
+    <header><h3><span class="dot" style="--c:var(--ant)"></span>Carpenter ants</h3><p>Carpenter ants don't eat wood. They carve nests in it, usually where it is already damp, and push the shavings out.</p></header>
+    <div class="shots">
+      <figure class="shot" style="--c:var(--ant)">
+        <div class="frame"><img src="/gallery/carpenter-ant-galleries.jpg" alt="Carpenter ant galleries" loading="lazy"></div>
+        <figcaption><strong>Carpenter ant galleries</strong><p class="look">Smooth, clean tunnels that look sanded, cut across the grain. No soil.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--ant)">
+        <div class="frame"><img src="/gallery/carpenter-ant-frass.jpg" alt="Carpenter ant frass" loading="lazy"></div>
+        <figcaption><strong>Carpenter ant frass</strong><p class="look">Coarse shavings like pencil sharpener waste, often mixed with dead ant parts.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--ant)">
+        <div class="frame"><img src="/gallery/carpenter-ant-workers.jpg" alt="Carpenter ant workers" loading="lazy"></div>
+        <figcaption><strong>Carpenter ant workers</strong><p class="look">Large black or red-and-black ants with elbowed antennae and a pinched waist.</p><p class="credit"></p></figcaption>
+      </figure>
+    </div>
+  </div>
 
-      <label class="field"><span>Notes</span>
-        <textarea id="notes" placeholder="e.g. Damage along sill under the kitchen sink. Homeowner saw winged insects in April."></textarea>
-      </label>
+  <div class="gtype" id="rot">
+    <header><h3><span class="dot" style="--c:var(--water)"></span>Wood rot</h3><p>Rot is fungus, not insects. It needs wood that stays wet, so find the water source.</p></header>
+    <div class="shots">
+      <figure class="shot" style="--c:var(--water)">
+        <div class="frame"><img src="/gallery/brown-rot.jpg" alt="Brown rot" loading="lazy"></div>
+        <figcaption><strong>Brown rot</strong><p class="look">Dark, shrunken wood that cracks into cubes and crumbles to powder.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--water)">
+        <div class="frame"><img src="/gallery/white-rot.jpg" alt="White rot" loading="lazy"></div>
+        <figcaption><strong>White rot</strong><p class="look">Pale, bleached wood that turns soft, stringy or spongy.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--water)">
+        <div class="frame"><img src="/gallery/rot-at-sill.jpg" alt="Rot at a sill or rim joist" loading="lazy"></div>
+        <figcaption><strong>Rot at a sill or rim joist</strong><p class="look">Staining and soft wood near grade, leaks or poor drainage. The probe sinks in easily.</p><p class="credit"></p></figcaption>
+      </figure>
+    </div>
+  </div>
 
-      <label class="field" id="codeField" hidden><span>Access code</span>
-        <input type="text" id="accessCode" autocomplete="off" placeholder="From whoever sent you this link">
-      </label>
-
-      <div class="actions">
-        <button type="submit" class="primary" id="analyze" disabled>Analyze photos</button>
-        <button type="button" class="ghost" id="stop" hidden>Stop</button>
-        <button type="button" class="ghost" id="reset">Clear</button>
-      </div>
-      <p class="note" id="status">Add at least one photo to run the check.</p>
-    </form>
-
-    <div class="panel result" id="result" aria-live="polite"></div>
+  <div class="gtype" id="beetles">
+    <header><h3><span class="dot" style="--c:var(--beetle)"></span>Wood-boring beetles</h3><p>Beetle larvae tunnel inside the wood for years. The adults chew out through exit holes, which are often the first sign.</p></header>
+    <div class="shots">
+      <figure class="shot" style="--c:var(--beetle)">
+        <div class="frame"><img src="/gallery/powderpost-exit-holes.jpg" alt="Powderpost beetle exit holes" loading="lazy"></div>
+        <figcaption><strong>Powderpost beetle exit holes</strong><p class="look">Round holes 1/32–1/8 in. across. Fresh holes are light-colored inside.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--beetle)">
+        <div class="frame"><img src="/gallery/powderpost-frass.jpg" alt="Powderpost beetle frass" loading="lazy"></div>
+        <figcaption><strong>Powderpost beetle frass</strong><p class="look">Fine, flour-like powder sifting out of holes onto the surface below.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--beetle)">
+        <div class="frame"><img src="/gallery/old-house-borer.jpg" alt="Old house borer damage" loading="lazy"></div>
+        <figcaption><strong>Old house borer damage</strong><p class="look">Oval exit holes about 1/4 in. across in softwood framing, with ripple-marked galleries packed with frass.</p><p class="credit"></p></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -238,7 +246,7 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
   <div class="head">
     <span class="eyebrow">Step 2</span>
     <h2>Field ID guide</h2>
-    <p class="muted">What separates the three most common calls. Check at least two independent signs before you commit to one.</p>
+    <p class="muted">What separates the most common calls. Check at least two independent signs before you commit to one.</p>
   </div>
   <div class="scroll">
     <table>
@@ -248,23 +256,24 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
           <th scope="col" style="--c:var(--termite)"><span class="dot"></span>Subterranean termites</th>
           <th scope="col" style="--c:var(--termite)"><span class="dot"></span>Drywood termites</th>
           <th scope="col" style="--c:var(--ant)"><span class="dot"></span>Carpenter ants</th>
-          <th scope="col" style="--c:var(--water)"><span class="dot"></span>Water damage / decay</th>
+          <th scope="col" style="--c:var(--water)"><span class="dot"></span>Wood rot</th>
+          <th scope="col" style="--c:var(--beetle)"><span class="dot"></span>Wood-boring beetles</th>
         </tr>
       </thead>
       <tbody>
-        <tr><th scope="row">Galleries</th><td>Follow the grain, eat the soft springwood and leave the growth rings. Walls plastered with soil and feces, so they look dirty.</td><td>Cut across the grain into smooth, connected chambers. Clean inside.</td><td>Smooth and clean, almost sanded. Cut across the grain. No soil.</td><td>No galleries. Surface cracking, shrinkage, stringy or cubical breakdown.</td></tr>
-        <tr><th scope="row">Debris</th><td>No frass piles. Soil and mud packed into voids.</td><td>Hard, six-sided pellets about 1 mm long, piled below kick-out holes.</td><td>Coarse, fibrous shavings like pencil sharpener waste, often with dead ant parts.</td><td>None. Crumbling wood, fungal growth, stains.</td></tr>
-        <tr><th scope="row">Outside the wood</th><td>Mud tubes on foundations, piers and slab edges, about pencil width.</td><td>Kick-out holes 1–2 mm wide, often sealed with a brown plug.</td><td>Slit-like windows; ant trails along wires, plumbing and trees.</td><td>Tide-line stains, peeling paint, rust on fasteners, efflorescence.</td></tr>
-        <tr><th scope="row">Swarmers</th><td colspan="2">Straight bead-like antennae, thick waist, two pairs of equal wings that drop off easily.</td><td>Elbowed antennae, pinched waist, hind wings shorter than front wings.</td><td>None. Look for fungus gnats, mold, mushrooms.</td></tr>
-        <tr><th scope="row">Typical moisture</th><td>Needs soil contact or a steady water source.</td><td>Dry wood, under about 12%.</td><td>Prefers wood already softened by moisture.</td><td class="mono">Decay starts above ~20% and is active near 28–30%</td></tr>
-        <tr><th scope="row">Typical locations</th><td>Sill plates, joists near grade, slab cracks, bath traps, door frames.</td><td>Attics, window frames, furniture. Mostly southern and coastal areas.</td><td>Window and door frames, roof eaves, around leaks, hollow porch columns.</td><td>Under tubs and sinks, around toilets, roof valleys, rim joists, deck ledgers.</td></tr>
+        <tr><th scope="row">Galleries</th><td>Follow the grain, eat the soft springwood and leave the growth rings. Walls plastered with soil and feces, so they look dirty.</td><td>Cut across the grain into smooth, connected chambers. Clean inside.</td><td>Smooth and clean, almost sanded. Cut across the grain. No soil.</td><td>No galleries. Surface cracking, shrinkage, stringy or cubical breakdown.</td><td>Small tunnels packed tight with frass. Powderpost tunnels are round, about 1/16 in.; old house borer tunnels are oval with ripple marks.</td></tr>
+        <tr><th scope="row">Debris</th><td>No frass piles. Soil and mud packed into voids.</td><td>Hard, six-sided pellets about 1 mm long, piled below kick-out holes.</td><td>Coarse, fibrous shavings like pencil sharpener waste, often with dead ant parts.</td><td>None. Crumbling wood, fungal growth, stains.</td><td>Powderpost: fine, flour-like powder. Old house borer: coarse, pellet-like frass packed in the tunnels.</td></tr>
+        <tr><th scope="row">Outside the wood</th><td>Mud tubes on foundations, piers and slab edges, about pencil width.</td><td>Kick-out holes 1–2 mm wide, often sealed with a brown plug.</td><td>Slit-like windows; ant trails along wires, plumbing and trees.</td><td>Tide-line stains, peeling paint, rust on fasteners, efflorescence.</td><td>Round exit holes 1/32–1/8 in. (powderpost) or oval holes about 1/4 in. (old house borer). Fresh holes look light inside.</td></tr>
+        <tr><th scope="row">Swarmers</th><td colspan="2">Straight bead-like antennae, thick waist, two pairs of equal wings that drop off easily.</td><td>Elbowed antennae, pinched waist, hind wings shorter than front wings.</td><td>None. Look for fungus gnats, mold, mushrooms.</td><td>No swarms. Small hard-shelled adult beetles, often found on windowsills near infested wood.</td></tr>
+        <tr><th scope="row">Typical moisture</th><td>Needs soil contact or a steady water source.</td><td>Dry wood, under about 12%.</td><td>Prefers wood already softened by moisture.</td><td class="mono">Decay starts above ~20% and is active near 28–30%</td><td>Most need wood above about 12–13%. Common in damp crawlspaces.</td></tr>
+        <tr><th scope="row">Typical locations</th><td>Sill plates, joists near grade, slab cracks, bath traps, door frames.</td><td>Attics, window frames, furniture. Mostly southern and coastal areas.</td><td>Window and door frames, roof eaves, around leaks, hollow porch columns.</td><td>Under tubs and sinks, around toilets, roof valleys, rim joists, deck ledgers.</td><td>Hardwood floors, trim and furniture; crawlspace joists and sills; softwood framing in attics.</td></tr>
       </tbody>
     </table>
   </div>
 
   <h3>Lookalikes that trip people up</h3>
   <div class="lookalike">
-    <div class="panel"><h3>Powderpost beetles</h3><p>Round exit holes 1/32–1/8 in. with fine, flour-like powder. Mostly hardwoods and older softwood framing.</p></div>
+    <div class="panel"><h3>Carpenter bees</h3><p>Perfectly round holes about 1/2 in. across in exposed wood such as fascia, eaves and decks, with coarse sawdust below. Not the same as beetle exit holes.</p></div>
     <div class="panel"><h3>Old vs. active damage</h3><p>Dry, brittle mud tubes and broken-open galleries with no workers inside can be old. Break a tube: if it is rebuilt in a few days, it is active.</p></div>
     <div class="panel"><h3>Damage plus decay</h3><p>Termites and carpenter ants move into wood that is already wet. Expect to find both and report both.</p></div>
     <div class="panel"><h3>Mud dauber and ant debris</h3><p>Mud dauber nests are blob- or pipe-organ-shaped and not attached to soil. Ant nests along slabs can push out soil that looks like termite dirt.</p></div>
@@ -353,7 +362,7 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
   </div>
   <div class="faq">
     <details><summary>How do I tell old termite damage from active infestation?</summary><div class="ans"><p>Look for live insects first. Break a small section of mud tube and look for workers, then re-check in a few days to see if it has been repaired. Moist, dark soil in galleries suggests activity; dry, crumbly soil and empty galleries suggest old damage. If you can't confirm either way, report the evidence as present and say that activity was not observed.</p></div></details>
-    <details><summary>Can a photo alone confirm termites?</summary><div class="ans"><p>No. A photo can show that damage matches termites, ants or decay, but the call comes from what you see, probe and measure on site. Use the photo check as a second opinion and a record for the file.</p></div></details>
+    <details><summary>Can a photo alone confirm termites?</summary><div class="ans"><p>No. A photo can show that damage looks like termites, ants, beetles or rot, but the call comes from what you see, probe and measure on site. Use the example photos for comparison and your own photos as a record for the file.</p></div></details>
     <details><summary>Do I report carpenter ants on a WDI report?</summary><div class="ans"><p>Yes. Carpenter ants are wood-destroying insects on the standard NPMA-33 form, along with termites, wood-boring beetles and carpenter bees. Report visible evidence and damage. Fungus and decay are usually reported as conducive conditions, not as insect findings.</p></div></details>
     <details><summary>What moisture readings should I worry about?</summary><div class="ans"><p>Framing in a healthy house usually reads 8–15%. Above about 20% is conducive to decay and insects. Near 28–30% (fiber saturation) decay fungi grow actively. Make sure your meter is set for the wood species and adjust for temperature.</p></div></details>
     <details><summary>A swarmer was found indoors but I see no other evidence. What do I write?</summary><div class="ans"><p>A swarmer indoors is evidence of a colony nearby, often inside the structure. Identify it (termite or ant), report it as evidence, note where it was found, and recommend a full evaluation. Keep the specimen in a vial if you can.</p></div></details>
@@ -364,177 +373,37 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
 </section>
 
 <footer>
-  <p>This page is a field reference. It does not replace state licensing rules, your company's inspection protocol or the report form you are required to use. Photo results are a preliminary read. The inspector on site makes the final determination.</p>
+  <p>This page is a field reference. It does not replace state licensing rules, your company's inspection protocol or the report form you are required to use. The inspector on site makes the final determination.</p>
 </footer>
 </main>
 
 <script>
 (() => {
-  const $ = (id) => document.getElementById(id);
-  const form = $("checkForm"), input = $("photos"), drop = $("drop"), thumbs = $("thumbs");
-  const btn = $("analyze"), stopBtn = $("stop"), status = $("status"), out = $("result");
-  const codeField = $("codeField"), codeInput = $("accessCode");
-  const MAX_COUNT = 4, MAX_SIDE = 1600;
-  const TYPES = ["image/jpeg","image/png","image/webp","image/gif"];
-  let files = [], ctl = null, busy = false;
-
-  const CATS = [
-    {key:"subterranean_termite", label:"Subterranean termite", c:"var(--termite)"},
-    {key:"drywood_termite", label:"Drywood termite", c:"var(--termite)"},
-    {key:"carpenter_ant", label:"Carpenter ant", c:"var(--ant)"},
-    {key:"water_damage", label:"Water / decay", c:"var(--water)"},
-    {key:"other", label:"Other / unclear", c:"var(--other)"},
-  ];
-  const COLOR = {subterranean_termite:"var(--termite)",drywood_termite:"var(--termite)",carpenter_ant:"var(--ant)",water_damage:"var(--water)",other:"var(--other)"};
-
-  const EXAMPLE = {
-    primary:"subterranean_termite", headline:"Likely subterranean termite damage", confidence:"medium",
-    scores:{subterranean_termite:72,drywood_termite:3,carpenter_ant:10,water_damage:12,other:3},
-    evidence:["Galleries run with the grain and leave the harder latewood rings","Soil lining visible on gallery walls","Damage is on a sill plate close to grade"],
-    against:["No mud tube visible in the frame","Wood surface is darkened, so some decay may also be present"],
-    next_photos:["Wide shot of the foundation wall below this sill","Close-up of any tube with a coin for scale"],
-    field_checks:["Break a tube and look for live workers","Probe the sill 12 in. each way to map the extent"],
-    conducive:["Possible wood-to-soil contact at the sill"]
-  };
-
-  try { const saved = localStorage.getItem("damageCheckCode"); if (saved) { codeInput.value = saved; codeField.hidden = false; } } catch {}
-
-  function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-  function list(arr){return Array.isArray(arr)&&arr.length?`<ul>${arr.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:`<p class="muted">None noted.</p>`}
-
-  function render(r, isExample){
-    const primary = COLOR[r.primary] ? r.primary : "other";
-    const sc = r.scores || {};
-    out.innerHTML = `
-      ${isExample ? `<span class="tag">Example result</span>` : ""}
-      <div class="verdict" style="--vc:${COLOR[primary]}">
-        <span class="eyebrow">Best match · ${esc(r.confidence || "low")} confidence</span>
-        <div class="call">${esc(r.headline || "Unclear from these photos")}</div>
-      </div>
-      <div class="bars">${CATS.map(c=>{const v=Math.max(0,Math.min(100,Math.round(Number(sc[c.key])||0)));return `<div class="bar" style="--c:${c.c}"><span>${c.label}</span><div class="track"><div class="fill" style="width:${v}%"></div></div><span class="pct">${v}%</span></div>`}).join("")}</div>
-      <div><h4>What points this way</h4>${list(r.evidence)}</div>
-      <div><h4>What doesn't fit</h4>${list(r.against)}</div>
-      <div><h4>Check on site</h4>${list(r.field_checks)}</div>
-      <div><h4>Photos that would help</h4>${list(r.next_photos)}</div>
-      <div><h4>Conducive conditions seen</h4>${list(r.conducive)}</div>
-      <p class="disclaimer">${isExample ? "This is a sample of what a result looks like. Add your own photos to run a check." : "Preliminary read from photos only. Confirm on site before you write the report."}</p>`;
-  }
-
-  // A failed check must never leave the sample result on screen, or it reads
-  // as a real answer for the uploaded photos.
-  function renderError(msg){
-    out.innerHTML = `
-      <span class="eyebrow">No result</span>
-      <div class="verdict" style="--vc:var(--stop)"><div class="call">These photos weren't analyzed</div></div>
-      <p>${esc(msg)}</p>
-      <p class="disclaimer">Fix the problem above, then choose Analyze photos again.</p>`;
-  }
-
-  function refreshThumbs(){
-    thumbs.innerHTML = "";
-    files.forEach((f,i)=>{
-      const fig = document.createElement("figure");
-      const img = document.createElement("img");
-      img.alt = `Photo ${i+1}`; img.src = URL.createObjectURL(f);
-      img.onload = () => URL.revokeObjectURL(img.src);
-      const x = document.createElement("button"); x.type="button"; x.textContent="Remove"; x.setAttribute("aria-label",`Remove photo ${i+1}`);
-      x.onclick = () => { files.splice(i,1); refreshThumbs(); };
-      fig.append(img,x); thumbs.append(fig);
-    });
-    updateState();
-  }
-  function addFiles(list){
-    const all = [...list];
-    const incoming = all.filter(f=>TYPES.includes(f.type));
-    const skipped = all.length - incoming.length;
-    files = files.concat(incoming).slice(0,MAX_COUNT);
-    refreshThumbs();
-    if (skipped) setStatus(`Skipped ${skipped} file${skipped>1?"s":""}. Use JPEG, PNG, WebP or GIF.`, true);
-  }
-  function setStatus(t, err){status.textContent=t; status.classList.toggle("err",!!err)}
-  function updateState(){
-    btn.disabled = busy || !files.length;
-    if (busy) return;
-    if (!files.length) setStatus("Add at least one photo to run the check.");
-    else setStatus(`${files.length} photo${files.length>1?"s":""} ready.`);
-  }
-
-  // Phone photos are often 5-10 MB. Shrink each to at most 1600px on the long
-  // side as JPEG so the upload is fast and fits the server's request size limit.
-  async function shrink(file){
-    try {
-      const bmp = await createImageBitmap(file);
-      const scale = Math.min(1, MAX_SIDE / Math.max(bmp.width, bmp.height));
-      const w = Math.round(bmp.width*scale), h = Math.round(bmp.height*scale);
-      const canvas = document.createElement("canvas"); canvas.width = w; canvas.height = h;
-      canvas.getContext("2d").drawImage(bmp, 0, 0, w, h);
-      bmp.close?.();
-      const blob = await new Promise(res => canvas.toBlob(res, "image/jpeg", 0.85));
-      return blob || file;
-    } catch { return file; }
-  }
-
-  input.addEventListener("change", e => { addFiles(e.target.files); input.value=""; });
-  ["dragenter","dragover"].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.add("over")}));
-  ["dragleave","drop"].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.remove("over")}));
-  drop.addEventListener("drop", e => addFiles(e.dataTransfer.files));
-  $("reset").onclick = () => { ctl?.abort(); files=[]; $("loc").value=""; $("notes").value=""; document.querySelectorAll("#obs input").forEach(i=>i.checked=false); refreshThumbs(); render(EXAMPLE,true); };
-  stopBtn.onclick = () => ctl?.abort();
-
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    if (!files.length || busy) return;
-    busy = true; btn.disabled = true; stopBtn.hidden = false;
-    ctl = new AbortController();
-    setStatus("Uploading and looking at the photos. This usually takes 20–60 seconds.");
-    out.innerHTML = `<span class="eyebrow">Working</span><p class="muted">Analyzing photos...</p>`;
-    try {
-      const body = new FormData();
-      for (const f of files) body.append("photos", await shrink(f), "photo.jpg");
-      body.append("location", $("loc").value);
-      document.querySelectorAll("#obs input:checked").forEach(i => body.append("observed", i.value));
-      body.append("notes", $("notes").value.trim());
-      const code = codeInput.value.trim();
-      const res = await fetch("/api/analyze", {
-        method: "POST", body, signal: ctl.signal,
-        headers: code ? {"x-access-code": code} : {},
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data.result) {
-        if (data.code === "bad_code") {
-          codeField.hidden = false; codeInput.focus();
-          setStatus(code ? data.error : "This check needs an access code. Enter it above and try again.", true);
-        } else {
-          setStatus(data.error || "Something went wrong. Try again.", true);
-        }
-        renderError(status.textContent);
-        return;
-      }
-      if (code) { try { localStorage.setItem("damageCheckCode", code); } catch {} }
-      render(data.result, false);
-      setStatus("Done. Change the photos or notes to run it again.");
-    } catch (err) {
-      if (err && err.name === "AbortError") setStatus("Stopped.");
-      else setStatus("Couldn't reach the server. Check your connection and try again.", true);
-      renderError(status.textContent);
-    } finally {
-      busy = false; stopBtn.hidden = true; ctl = null;
-      btn.disabled = !files.length;
-    }
+  // Until a photo file is added under public/gallery/, show a labeled placeholder.
+  document.querySelectorAll(".shot img").forEach(img => {
+    const showMissing = () => {
+      if (img.dataset.missing) return;
+      img.dataset.missing = "1";
+      img.hidden = true;
+      const m = document.createElement("span");
+      m.className = "missing";
+      m.textContent = "Photo coming soon";
+      img.parentNode.append(m);
+    };
+    img.addEventListener("error", showMissing);
+    if (img.complete && img.naturalWidth === 0) showMissing();
   });
 
-  $("copyQ").onclick = async () => {
-    const text = [...document.querySelectorAll("#qgroups .qgroup")].map(g=>{
+  const copyBtn = document.getElementById("copyQ"), copyNote = document.getElementById("copyNote");
+  copyBtn.onclick = async () => {
+    const text = [...document.querySelectorAll("#qgroups .qgroup")].map(g => {
       const h = g.querySelector("h3").textContent;
-      const qs = [...g.querySelectorAll("li")].map((li,i)=>`${i+1}. ${li.childNodes[0].textContent.trim()}`);
+      const qs = [...g.querySelectorAll("li")].map((li,i) => `${i+1}. ${li.childNodes[0].textContent.trim()}`);
       return `${h}\n${qs.join("\n")}`;
     }).join("\n\n");
-    try { await navigator.clipboard.writeText(text); $("copyNote").textContent = "Copied."; }
-    catch { $("copyNote").textContent = "Copy isn't available here. Select the questions and copy them manually."; }
+    try { await navigator.clipboard.writeText(text); copyNote.textContent = "Copied."; }
+    catch { copyNote.textContent = "Copy isn't available here. Select the questions and copy them manually."; }
   };
-
-  render(EXAMPLE, true);
-  updateState();
 })();
 </script>
 </body>
