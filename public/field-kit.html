@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>WDI Field Kit</title>
-<meta name="description" content="Field reference for wood-destroying insect inspectors: example photos of termite, carpenter ant, wood rot and wood-boring beetle damage, plus an ID guide, homeowner questions, knockout factors and FAQ.">
+<meta name="description" content="Field reference for wood-destroying insect inspectors: example photos of termite, carpenter ant and wood rot damage, side-by-side comparisons, plus an ID guide, homeowner questions, knockout factors and FAQ.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -74,7 +74,7 @@ button.ghost{font:inherit;font-weight:600;border-radius:6px;padding:10px 16px;cu
 .gtype > header h3{display:flex;align-items:center;gap:10px}
 .gtype > header h3 .dot{width:12px;height:12px}
 .gtype > header p{color:var(--ink-2);font-size:14.5px}
-.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
 .shot{margin:0;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:10px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
 .shot .frame{aspect-ratio:4/3;background:var(--sunk);position:relative;max-width:100%}
 .shot img{width:100%;height:100%;object-fit:cover;display:block}
@@ -85,6 +85,24 @@ button.ghost{font:inherit;font-weight:600;border-radius:6px;padding:10px 16px;cu
 .shot figcaption .look{color:var(--ink-2)}
 .shot figcaption .credit:empty{display:none}
 .shot figcaption .credit{font-size:11.5px;color:var(--ink-2)}
+
+/* Side by side */
+.compares{display:grid;gap:18px}
+.compare{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:14px;scroll-margin-top:70px}
+.compare h3{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.compare h3 .vs{font-family:var(--f-mono);font-size:13px;font-weight:400;color:var(--ink-2);text-transform:uppercase;letter-spacing:.06em}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pair figure{margin:0;display:grid;gap:6px}
+.pair .frame{aspect-ratio:4/3;background:var(--sunk);border-radius:8px;overflow:hidden;border-top:3px solid var(--c);max-width:100%}
+.pair img{width:100%;height:100%;object-fit:cover;display:block}
+.pair figcaption{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
+.diffs{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:d}
+.diffs li{counter-increment:d;display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;border-top:1px solid var(--line);padding-top:10px}
+.diffs li h4{grid-column:1/-1;margin:0;font-size:14px;font-weight:600}
+.diffs li h4::before{content:counter(d) ". ";font-family:var(--f-mono);color:var(--ink-2)}
+.diffs li p{font-size:14px;padding-left:10px;border-left:3px solid var(--c)}
+.compare .tip{font-size:13.5px;color:var(--ink-2)}
+@media (max-width:560px){.pair,.diffs li{grid-template-columns:1fr}}
 
 /* Field ID table */
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
@@ -138,13 +156,14 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
   <header class="top">
     <span class="eyebrow">Wood-destroying insect inspection · field reference</span>
     <h1>WDI Field Kit</h1>
-    <p class="lede">A pocket reference for inspectors: example photos of termite, carpenter ant, wood rot and wood-boring beetle damage, a side-by-side ID guide, questions to ask the homeowner, knockout factors and common questions.</p>
+    <p class="lede">A pocket reference for inspectors: example photos of termite, carpenter ant and wood rot damage, side-by-side comparisons, an ID guide, questions to ask the homeowner, knockout factors and common questions.</p>
   </header>
 </div>
 
 <nav class="tabs" aria-label="Sections">
   <div class="wrap">
     <a href="#gallery">Damage photos</a>
+    <a href="#side-by-side">Side by side</a>
     <a href="#id">Field ID</a>
     <a href="#questions">Questions to ask</a>
     <a href="#knockouts">Knockout factors</a>
@@ -165,86 +184,142 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
     <a href="#termites" style="--c:var(--termite)"><span class="dot"></span>Termites</a>
     <a href="#ants" style="--c:var(--ant)"><span class="dot"></span>Carpenter ants</a>
     <a href="#rot" style="--c:var(--water)"><span class="dot"></span>Wood rot</a>
-    <a href="#beetles" style="--c:var(--beetle)"><span class="dot"></span>Wood-boring beetles</a>
+    <a href="#side-by-side" style="--c:var(--accent)"><span class="dot"></span>Side by side</a>
   </nav>
 
   <div class="gtype" id="termites">
-    <header><h3><span class="dot" style="--c:var(--termite)"></span>Termites</h3><p>Subterranean termites travel in mud tubes and leave soil in their galleries. Drywood termites live inside dry wood and push out hard pellets.</p></header>
+    <header><h3><span class="dot" style="--c:var(--termite)"></span>Termites</h3><p>Subterranean termites eat wood along the grain and pack their tunnels with soil. The outside surface is often left intact, so damage hides under paint.</p></header>
     <div class="shots">
       <figure class="shot" style="--c:var(--termite)">
-        <div class="frame"><img src="/gallery/termite-mud-tubes.jpg" alt="Mud tubes on a foundation" loading="lazy"></div>
-        <figcaption><strong>Mud tubes on a foundation</strong><p class="look">Pencil-width tubes of soil running up concrete, block or piers to the wood above.</p><p class="credit"></p></figcaption>
+        <div class="frame"><img src="/gallery/termite-galleries-layers.jpg" alt="Layered galleries" loading="lazy"></div>
+        <figcaption><strong>Layered galleries</strong><p class="look">Wood eaten along the grain, leaving thin sheets of the harder growth rings.</p><p class="credit"></p></figcaption>
       </figure>
       <figure class="shot" style="--c:var(--termite)">
-        <div class="frame"><img src="/gallery/termite-galleries.jpg" alt="Subterranean termite galleries" loading="lazy"></div>
-        <figcaption><strong>Subterranean termite galleries</strong><p class="look">Wood eaten along the grain in layers, with soil and mud plastered on the gallery walls.</p><p class="credit"></p></figcaption>
+        <div class="frame"><img src="/gallery/termite-galleries-soil.jpg" alt="Galleries packed with soil" loading="lazy"></div>
+        <figcaption><strong>Galleries packed with soil</strong><p class="look">Tunnels filled and lined with dried mud. The bits of soil are the giveaway.</p><p class="credit"></p></figcaption>
       </figure>
       <figure class="shot" style="--c:var(--termite)">
-        <div class="frame"><img src="/gallery/drywood-termite-pellets.jpg" alt="Drywood termite pellets" loading="lazy"></div>
-        <figcaption><strong>Drywood termite pellets</strong><p class="look">Small, hard, six-sided pellets piled below tiny kick-out holes.</p><p class="credit"></p></figcaption>
+        <div class="frame"><img src="/gallery/termite-galleries-painted-board.jpg" alt="Hidden under paint" loading="lazy"></div>
+        <figcaption><strong>Hidden under paint</strong><p class="look">The painted face looks fine while the wood behind it is hollowed into layers.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--termite)">
+        <div class="frame"><img src="/gallery/termite-damage-beam.jpg" alt="Damage in a beam" loading="lazy"></div>
+        <figcaption><strong>Damage in a beam</strong><p class="look">Hollowed layers running the length of the board, with mud stuck to the wood.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--termite)">
+        <div class="frame"><img src="/gallery/termite-damage-trim.jpg" alt="Damage in trim" loading="lazy"></div>
+        <figcaption><strong>Damage in trim</strong><p class="look">Mud crust and eaten-out layers where the board was in contact with moisture.</p><p class="credit"></p></figcaption>
       </figure>
     </div>
   </div>
 
   <div class="gtype" id="ants">
-    <header><h3><span class="dot" style="--c:var(--ant)"></span>Carpenter ants</h3><p>Carpenter ants don't eat wood. They carve nests in it, usually where it is already damp, and push the shavings out.</p></header>
+    <header><h3><span class="dot" style="--c:var(--ant)"></span>Carpenter ants</h3><p>Carpenter ants don't eat wood. They carve smooth nest cavities in it, usually where it is already damp, and push the sawdust out.</p></header>
     <div class="shots">
       <figure class="shot" style="--c:var(--ant)">
-        <div class="frame"><img src="/gallery/carpenter-ant-galleries.jpg" alt="Carpenter ant galleries" loading="lazy"></div>
-        <figcaption><strong>Carpenter ant galleries</strong><p class="look">Smooth, clean tunnels that look sanded, cut across the grain. No soil.</p><p class="credit"></p></figcaption>
+        <div class="frame"><img src="/gallery/carpenter-ant-galleries-board.jpg" alt="Clean, smooth galleries" loading="lazy"></div>
+        <figcaption><strong>Clean, smooth galleries</strong><p class="look">Tunnels look sanded and clean, with no soil inside.</p><p class="credit"></p></figcaption>
       </figure>
       <figure class="shot" style="--c:var(--ant)">
-        <div class="frame"><img src="/gallery/carpenter-ant-frass.jpg" alt="Carpenter ant frass" loading="lazy"></div>
-        <figcaption><strong>Carpenter ant frass</strong><p class="look">Coarse shavings like pencil sharpener waste, often mixed with dead ant parts.</p><p class="credit"></p></figcaption>
+        <div class="frame"><img src="/gallery/carpenter-ant-galleries-post.jpg" alt="Cavities through the grain" loading="lazy"></div>
+        <figcaption><strong>Cavities through the grain</strong><p class="look">Rounded chambers cut through both soft and hard wood.</p><p class="credit"></p></figcaption>
       </figure>
       <figure class="shot" style="--c:var(--ant)">
-        <div class="frame"><img src="/gallery/carpenter-ant-workers.jpg" alt="Carpenter ant workers" loading="lazy"></div>
-        <figcaption><strong>Carpenter ant workers</strong><p class="look">Large black or red-and-black ants with elbowed antennae and a pinched waist.</p><p class="credit"></p></figcaption>
+        <div class="frame"><img src="/gallery/carpenter-ant-galleries-closeup.jpg" alt="Close-up of a nest" loading="lazy"></div>
+        <figcaption><strong>Close-up of a nest</strong><p class="look">Smooth, honeycomb-like cavities with sound wood between them.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--ant)">
+        <div class="frame"><img src="/gallery/carpenter-ant-sill-frass.jpg" alt="Sawdust at a damp sill" loading="lazy"></div>
+        <figcaption><strong>Sawdust at a damp sill</strong><p class="look">Shavings pushed out of a sill that is also rotting. Ants follow moisture.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--ant)">
+        <div class="frame"><img src="/gallery/carpenter-ant-tree.jpg" alt="Nest in a tree" loading="lazy"></div>
+        <figcaption><strong>Nest in a tree</strong><p class="look">Hollow, galleried wood in a tree. Nearby trees are a common source of ants in a house.</p><p class="credit"></p></figcaption>
       </figure>
     </div>
   </div>
 
   <div class="gtype" id="rot">
-    <header><h3><span class="dot" style="--c:var(--water)"></span>Wood rot</h3><p>Rot is fungus, not insects. It needs wood that stays wet, so find the water source.</p></header>
+    <header><h3><span class="dot" style="--c:var(--water)"></span>Wood rot</h3><p>Rot is fungus, not insects. It needs wood that stays wet, so look for the water source.</p></header>
     <div class="shots">
       <figure class="shot" style="--c:var(--water)">
-        <div class="frame"><img src="/gallery/brown-rot.jpg" alt="Brown rot" loading="lazy"></div>
-        <figcaption><strong>Brown rot</strong><p class="look">Dark, shrunken wood that cracks into cubes and crumbles to powder.</p><p class="credit"></p></figcaption>
+        <div class="frame"><img src="/gallery/brown-rot-log.jpg" alt="Brown rot, cracked into cubes" loading="lazy"></div>
+        <figcaption><strong>Brown rot, cracked into cubes</strong><p class="look">The wood shrinks, darkens and splits into brick-shaped chunks.</p><p class="credit"></p></figcaption>
       </figure>
       <figure class="shot" style="--c:var(--water)">
-        <div class="frame"><img src="/gallery/white-rot.jpg" alt="White rot" loading="lazy"></div>
-        <figcaption><strong>White rot</strong><p class="look">Pale, bleached wood that turns soft, stringy or spongy.</p><p class="credit"></p></figcaption>
+        <div class="frame"><img src="/gallery/brown-rot-rim-board.jpg" alt="Brown rot in a rim board" loading="lazy"></div>
+        <figcaption><strong>Brown rot in a rim board</strong><p class="look">Checkerboard cracking where the wood sat against wet masonry.</p><p class="credit"></p></figcaption>
       </figure>
       <figure class="shot" style="--c:var(--water)">
-        <div class="frame"><img src="/gallery/rot-at-sill.jpg" alt="Rot at a sill or rim joist" loading="lazy"></div>
-        <figcaption><strong>Rot at a sill or rim joist</strong><p class="look">Staining and soft wood near grade, leaks or poor drainage. The probe sinks in easily.</p><p class="credit"></p></figcaption>
+        <div class="frame"><img src="/gallery/rot-post-base.jpg" alt="Rot at the base of a post" loading="lazy"></div>
+        <figcaption><strong>Rot at the base of a post</strong><p class="look">Decay concentrated where the wood meets a damp floor.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--water)">
+        <div class="frame"><img src="/gallery/rot-weathered-board.jpg" alt="Weathered, rotted board" loading="lazy"></div>
+        <figcaption><strong>Weathered, rotted board</strong><p class="look">Gray, split wood that is soft and breaks apart when probed.</p><p class="credit"></p></figcaption>
+      </figure>
+      <figure class="shot" style="--c:var(--water)">
+        <div class="frame"><img src="/gallery/rot-house-corner.jpg" alt="Rot with insect damage" loading="lazy"></div>
+        <figcaption><strong>Rot with insect damage</strong><p class="look">Rotted corner framing that also has insect tunnels. Rot and insects are often found together.</p><p class="credit"></p></figcaption>
       </figure>
     </div>
   </div>
+</section>
 
-  <div class="gtype" id="beetles">
-    <header><h3><span class="dot" style="--c:var(--beetle)"></span>Wood-boring beetles</h3><p>Beetle larvae tunnel inside the wood for years. The adults chew out through exit holes, which are often the first sign.</p></header>
-    <div class="shots">
-      <figure class="shot" style="--c:var(--beetle)">
-        <div class="frame"><img src="/gallery/powderpost-exit-holes.jpg" alt="Powderpost beetle exit holes" loading="lazy"></div>
-        <figcaption><strong>Powderpost beetle exit holes</strong><p class="look">Round holes 1/32–1/8 in. across. Fresh holes are light-colored inside.</p><p class="credit"></p></figcaption>
-      </figure>
-      <figure class="shot" style="--c:var(--beetle)">
-        <div class="frame"><img src="/gallery/powderpost-frass.jpg" alt="Powderpost beetle frass" loading="lazy"></div>
-        <figcaption><strong>Powderpost beetle frass</strong><p class="look">Fine, flour-like powder sifting out of holes onto the surface below.</p><p class="credit"></p></figcaption>
-      </figure>
-      <figure class="shot" style="--c:var(--beetle)">
-        <div class="frame"><img src="/gallery/old-house-borer.jpg" alt="Old house borer damage" loading="lazy"></div>
-        <figcaption><strong>Old house borer damage</strong><p class="look">Oval exit holes about 1/4 in. across in softwood framing, with ripple-marked galleries packed with frass.</p><p class="credit"></p></figcaption>
-      </figure>
-    </div>
+<!-- SIDE BY SIDE -->
+<section class="block" id="side-by-side">
+  <div class="head">
+    <span class="eyebrow">Tell them apart</span>
+    <h2>Side by side</h2>
+    <p class="muted">The three most common calls, compared in pairs, with the top three differences for each.</p>
+  </div>
+  <div class="compares">
+    <article class="compare" id="termite-vs-ant">
+      <h3><span>Termites</span><span class="vs">vs.</span><span>Carpenter ants</span></h3>
+      <div class="pair">
+        <figure><div class="frame" style="--c:var(--termite)"><img src="/gallery/termite-galleries-layers.jpg" alt="Termites example" loading="lazy"></div><figcaption><span class="dot" style="--c:var(--termite)"></span>Termites</figcaption></figure>
+        <figure><div class="frame" style="--c:var(--ant)"><img src="/gallery/carpenter-ant-galleries-board.jpg" alt="Carpenter ants example" loading="lazy"></div><figcaption><span class="dot" style="--c:var(--ant)"></span>Carpenter ants</figcaption></figure>
+      </div>
+      <ol class="diffs">
+        <li><h4>What's inside the tunnels</h4><p style="--c:var(--termite)"><strong>Termites:</strong> Soil, mud and droppings plastered on the walls. Tunnels look dirty.</p><p style="--c:var(--ant)"><strong>Carpenter ants:</strong> Nothing. Walls are clean and smooth, almost sanded.</p></li>
+        <li><h4>Which way the tunnels run</h4><p style="--c:var(--termite)"><strong>Termites:</strong> Along the grain. Termites eat the soft wood and leave thin layers of the harder rings.</p><p style="--c:var(--ant)"><strong>Carpenter ants:</strong> Across the grain as well as along it, carved into open, rounded chambers.</p></li>
+        <li><h4>What gets pushed out</h4><p style="--c:var(--termite)"><strong>Termites:</strong> No sawdust piles. Look for mud tubes on the foundation instead.</p><p style="--c:var(--ant)"><strong>Carpenter ants:</strong> Piles of coarse sawdust, often mixed with dead ant parts, below small slit-like openings.</p></li>
+      </ol>
+      <p class="tip">Break open a gallery: soil means termites, clean wood means ants.</p>
+    </article>
+    <article class="compare" id="termite-vs-rot">
+      <h3><span>Termites</span><span class="vs">vs.</span><span>Wood rot</span></h3>
+      <div class="pair">
+        <figure><div class="frame" style="--c:var(--termite)"><img src="/gallery/termite-galleries-soil.jpg" alt="Termites example" loading="lazy"></div><figcaption><span class="dot" style="--c:var(--termite)"></span>Termites</figcaption></figure>
+        <figure><div class="frame" style="--c:var(--water)"><img src="/gallery/brown-rot-rim-board.jpg" alt="Wood rot example" loading="lazy"></div><figcaption><span class="dot" style="--c:var(--water)"></span>Wood rot</figcaption></figure>
+      </div>
+      <ol class="diffs">
+        <li><h4>Tunnels or cracks</h4><p style="--c:var(--termite)"><strong>Termites:</strong> Hollow tunnels running along the grain.</p><p style="--c:var(--water)"><strong>Wood rot:</strong> No tunnels. The wood shrinks and cracks across the grain into cubes, or turns stringy.</p></li>
+        <li><h4>Where the damage shows</h4><p style="--c:var(--termite)"><strong>Termites:</strong> Mostly inside. The surface or paint can look fine over hollow wood.</p><p style="--c:var(--water)"><strong>Wood rot:</strong> On the surface. Wood is darkened or bleached, and soft when probed.</p></li>
+        <li><h4>What causes it</h4><p style="--c:var(--termite)"><strong>Termites:</strong> Live insects and soil. Look for mud tubes, workers and swarmers.</p><p style="--c:var(--water)"><strong>Wood rot:</strong> Moisture and fungus. Look for the leak, a musty smell, and readings above about 20%.</p></li>
+      </ol>
+      <p class="tip">Probe it: a hollow sound with firm layers means termites, soft wood that crumbles or mushes means rot.</p>
+    </article>
+    <article class="compare" id="ant-vs-rot">
+      <h3><span>Carpenter ants</span><span class="vs">vs.</span><span>Wood rot</span></h3>
+      <div class="pair">
+        <figure><div class="frame" style="--c:var(--ant)"><img src="/gallery/carpenter-ant-galleries-closeup.jpg" alt="Carpenter ants example" loading="lazy"></div><figcaption><span class="dot" style="--c:var(--ant)"></span>Carpenter ants</figcaption></figure>
+        <figure><div class="frame" style="--c:var(--water)"><img src="/gallery/brown-rot-log.jpg" alt="Wood rot example" loading="lazy"></div><figcaption><span class="dot" style="--c:var(--water)"></span>Wood rot</figcaption></figure>
+      </div>
+      <ol class="diffs">
+        <li><h4>Cavities or cubes</h4><p style="--c:var(--ant)"><strong>Carpenter ants:</strong> Smooth, rounded cavities with firm, sound wood between them.</p><p style="--c:var(--water)"><strong>Wood rot:</strong> No cavities. The whole piece cracks into cubes or goes soft and spongy.</p></li>
+        <li><h4>Debris</h4><p style="--c:var(--ant)"><strong>Carpenter ants:</strong> Fibrous sawdust pushed outside the nest, often with insect parts.</p><p style="--c:var(--water)"><strong>Wood rot:</strong> Crumbly brown powder or mush left in place. No sawdust piles.</p></li>
+        <li><h4>Color and texture</h4><p style="--c:var(--ant)"><strong>Carpenter ants:</strong> Wood keeps its normal color inside the galleries.</p><p style="--c:var(--water)"><strong>Wood rot:</strong> Dark brown and shrunken (brown rot), or pale and stringy (white rot).</p></li>
+      </ol>
+      <p class="tip">They often show up together. Carpenter ants nest in wood that rot has already softened, so report both.</p>
+    </article>
   </div>
 </section>
 
 <!-- FIELD ID -->
 <section class="block" id="id">
   <div class="head">
-    <span class="eyebrow">Step 2</span>
+    <span class="eyebrow">Quick reference</span>
     <h2>Field ID guide</h2>
     <p class="muted">What separates the most common calls. Check at least two independent signs before you commit to one.</p>
   </div>
