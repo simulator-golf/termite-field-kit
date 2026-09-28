@@ -420,6 +420,16 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
       <p class="disclaimer">${isExample ? "This is a sample of what a result looks like. Add your own photos to run a check." : "Preliminary read from photos only. Confirm on site before you write the report."}</p>`;
   }
 
+  // A failed check must never leave the sample result on screen, or it reads
+  // as a real answer for the uploaded photos.
+  function renderError(msg){
+    out.innerHTML = `
+      <span class="eyebrow">No result</span>
+      <div class="verdict" style="--vc:var(--stop)"><div class="call">These photos weren't analyzed</div></div>
+      <p>${esc(msg)}</p>
+      <p class="disclaimer">Fix the problem above, then choose Analyze photos again.</p>`;
+  }
+
   function refreshThumbs(){
     thumbs.innerHTML = "";
     files.forEach((f,i)=>{
@@ -497,7 +507,7 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
         } else {
           setStatus(data.error || "Something went wrong. Try again.", true);
         }
-        render(EXAMPLE, true);
+        renderError(status.textContent);
         return;
       }
       if (code) { try { localStorage.setItem("damageCheckCode", code); } catch {} }
@@ -506,7 +516,7 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
     } catch (err) {
       if (err && err.name === "AbortError") setStatus("Stopped.");
       else setStatus("Couldn't reach the server. Check your connection and try again.", true);
-      render(EXAMPLE, true);
+      renderError(status.textContent);
     } finally {
       busy = false; stopBtn.hidden = true; ctl = null;
       btn.disabled = !files.length;
