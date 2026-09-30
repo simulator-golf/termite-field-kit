@@ -14,6 +14,7 @@
   --accent:#2F6A4A; --accent-ink:#FFFFFF; --accent-soft:#DDEBE2;
   --warn:#9A5B00; --warn-soft:#F7E8CC; --stop:#A8322A; --stop-soft:#F6DEDA;
   --termite:#A8322A; --ant:#6B4AA0; --water:#1F6391; --beetle:#8A6414; --other:#6A6F66;
+  --wood:#C8955A; --wood-edge:#8A5E2E; --concrete:#C9CCC4; --concrete-edge:#8E938A; --soil:#8B6A4A; --soil-dot:#6E5236; --foam:#EDD35E; --foam-edge:#B3941A; --stucco:#E6DFCF; --stucco-edge:#A99F88; --house:#DCD8CE; --house-edge:#7D847E; --roof:#56605A;
   --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
   --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
@@ -25,6 +26,7 @@
     --accent:#6FBE8F; --accent-ink:#0E1A13; --accent-soft:#1F3A2B;
     --warn:#E3A43B; --warn-soft:#3A2C12; --stop:#F07C70; --stop-soft:#3D1F1C;
     --termite:#F07C70; --ant:#B79BE8; --water:#6DB3E3; --beetle:#D9AE55; --other:#A6B2AA;
+    --wood:#9C7243; --wood-edge:#D2A56A; --concrete:#535A54; --concrete-edge:#8A918A; --soil:#5F4731; --soil-dot:#8C6C4D; --foam:#BFA43A; --foam-edge:#E9CF5B; --stucco:#7E7869; --stucco-edge:#BDB4A0; --house:#3A443F; --house-edge:#9AA59E; --roof:#A9B3AC;
   }
 }
 :root[data-theme="dark"]{
@@ -33,6 +35,7 @@
   --accent:#6FBE8F; --accent-ink:#0E1A13; --accent-soft:#1F3A2B;
   --warn:#E3A43B; --warn-soft:#3A2C12; --stop:#F07C70; --stop-soft:#3D1F1C;
   --termite:#F07C70; --ant:#B79BE8; --water:#6DB3E3; --beetle:#D9AE55; --other:#A6B2AA;
+  --wood:#9C7243; --wood-edge:#D2A56A; --concrete:#535A54; --concrete-edge:#8A918A; --soil:#5F4731; --soil-dot:#8C6C4D; --foam:#BFA43A; --foam-edge:#E9CF5B; --stucco:#7E7869; --stucco-edge:#BDB4A0; --house:#3A443F; --house-edge:#9AA59E; --roof:#A9B3AC;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -124,7 +127,26 @@ tbody th{font-weight:600;font-size:13px;color:var(--ink-2);width:130px}
 .qgroup li p.why{font-size:13px;color:var(--ink-2)}
 
 /* Knockouts */
-.ko{display:grid;gap:10px}
+.kfs{display:grid;gap:16px}
+.kf{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:14px;scroll-margin-top:70px}
+.kf > header{display:grid;gap:6px;max-width:75ch}
+.kf > header p{font-size:14.5px}
+.kf .rule{font-weight:600}
+.kf-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.kf-pair{grid-template-columns:1fr}}
+.kf-pair figure{margin:0;display:grid;gap:8px;align-content:start;border:1px solid var(--line);border-radius:8px;padding:12px;background:var(--bg)}
+.kf-pair figcaption{font-size:13.5px;color:var(--ink-2)}
+.verdict-tag{justify-self:start;font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:4px}
+.verdict-tag.ko{background:var(--stop-soft);color:var(--stop)}
+.verdict-tag.ok{background:var(--accent-soft);color:var(--accent)}
+.dg{width:100%;height:auto;display:block}
+.dg text{font-family:var(--f-body);font-size:12px;fill:var(--ink-2)}
+.dg text.em{fill:var(--ink);font-weight:600}
+.dg text.bad{fill:var(--stop);font-weight:600}
+.dg text.good{fill:var(--accent);font-weight:600}
+.dg .dim-bad{stroke:var(--stop);stroke-width:2;fill:none}
+.dg .dim-good{stroke:var(--accent);stroke-width:2;fill:none}
+.other{display:grid;gap:10px}
 .ko-item{display:grid;grid-template-columns:108px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
 @media (max-width:520px){.ko-item{grid-template-columns:1fr;gap:8px}}
 .sev{align-self:start;justify-self:start;font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:4px}
@@ -134,7 +156,6 @@ tbody th{font-weight:600;font-size:13px;color:var(--ink-2);width:130px}
 .ko-item h3{font-size:19px}
 .ko-item p{font-size:14px}
 .ko-item .body{display:grid;gap:4px}
-.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--ink-2);align-items:center}
 
 /* FAQ */
 .faq{display:grid;gap:8px}
@@ -407,25 +428,151 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
 <!-- KNOCKOUTS -->
 <section class="block" id="knockouts">
   <div class="head">
-    <span class="eyebrow">Stop, flag or limit</span>
+    <span class="eyebrow">Company policy</span>
     <h2>Knockout factors</h2>
-    <p class="muted">Findings that decide the report, block a clean letter or warranty, or limit what you can state. Adjust this list to match your company's policy and your state's rules.</p>
+    <p class="muted">Conditions that make a property a knockout. Each one shows what counts as a knockout and what doesn't. The drawings are simplified diagrams, not photos.</p>
   </div>
-  <div class="legend">
-    <span><span class="sev stop">Stop</span> decides the report or blocks a clean letter</span>
-    <span><span class="sev flag">Flag</span> needs further evaluation or treatment first</span>
-    <span><span class="sev limit">Limit</span> must be disclosed as a limitation</span>
+  <nav class="jump" aria-label="Knockout factors">
+    <a href="#ko-foam" style="--c:var(--stop)"><span class="dot"></span>Spray foam on the sill plate</a>
+    <a href="#ko-stucco" style="--c:var(--stop)"><span class="dot"></span>Stucco below grade</a>
+    <a href="#ko-roof" style="--c:var(--stop)"><span class="dot"></span>Flat roof</a>
+    <a href="#ko-crawl" style="--c:var(--stop)"><span class="dot"></span>Crawlspace under 18 in.</a>
+  </nav>
+  <div class="kfs">
+    <article class="kf" id="ko-foam">
+      <header><h3>Spray foam on the sill plate</h3><p class="rule">Knockout when spray foam insulation in the basement covers the sill plate all the way around.</p><p>If foam covers only a portion of the sill plate, it is not a knockout.</p></header>
+      <div class="kf-pair">
+        <figure><span class="verdict-tag ko">Knockout</span>
+        <svg class="dg" viewBox="0 0 320 210" role="img" aria-label="Spray foam over the entire sill plate">
+          <text x="160" y="18" text-anchor="middle" class="em">Basement, seen from above</text>
+          <rect x="40" y="30" width="240" height="140" fill="var(--concrete)" stroke="var(--concrete-edge)"/>
+          <rect x="58" y="48" width="204" height="104" fill="var(--bg)" stroke="var(--concrete-edge)"/>
+          <path d="M49,39 H271 V161 H49 Z" fill="none" stroke="var(--wood)" stroke-width="9"/>
+          <path d="M49,39 H271 V161 H49 Z" fill="none" stroke="var(--foam)" stroke-width="17" stroke-linejoin="round"/><path d="M49,39 H271 V161 H49 Z" fill="none" stroke="var(--foam-edge)" stroke-width="1" stroke-dasharray="3 5"/><text x="160" y="96" text-anchor="middle" class="bad">Foam covers the sill plate</text><text x="160" y="112" text-anchor="middle" class="bad">all the way around</text>
+          <rect x="22" y="188" width="14" height="10" fill="var(--concrete)" stroke="var(--concrete-edge)"/><text x="41" y="197">Foundation</text>
+          <rect x="120" y="188" width="14" height="10" fill="var(--wood)"/><text x="139" y="197">Sill plate</text>
+          <rect x="210" y="188" width="14" height="10" fill="var(--foam)" stroke="var(--foam-edge)"/><text x="229" y="197">Spray foam</text>
+        </svg>
+          <figcaption>Foam covers the whole sill plate, so none of it can be inspected.</figcaption></figure>
+        <figure><span class="verdict-tag ok">Not a knockout</span>
+        <svg class="dg" viewBox="0 0 320 210" role="img" aria-label="Spray foam over part of the sill plate">
+          <text x="160" y="18" text-anchor="middle" class="em">Basement, seen from above</text>
+          <rect x="40" y="30" width="240" height="140" fill="var(--concrete)" stroke="var(--concrete-edge)"/>
+          <rect x="58" y="48" width="204" height="104" fill="var(--bg)" stroke="var(--concrete-edge)"/>
+          <path d="M49,39 H271 V161 H49 Z" fill="none" stroke="var(--wood)" stroke-width="9"/>
+          <path d="M140,39 H49 V161 H100" fill="none" stroke="var(--foam)" stroke-width="17" stroke-linejoin="round"/><path d="M140,39 H49 V161 H100" fill="none" stroke="var(--foam-edge)" stroke-width="1" stroke-dasharray="3 5"/><text x="160" y="88" text-anchor="middle" class="good">Foam on one section only.</text><text x="160" y="104" text-anchor="middle" class="good">The rest of the sill plate</text><text x="160" y="120" text-anchor="middle" class="good">is still visible</text>
+          <rect x="22" y="188" width="14" height="10" fill="var(--concrete)" stroke="var(--concrete-edge)"/><text x="41" y="197">Foundation</text>
+          <rect x="120" y="188" width="14" height="10" fill="var(--wood)"/><text x="139" y="197">Sill plate</text>
+          <rect x="210" y="188" width="14" height="10" fill="var(--foam)" stroke="var(--foam-edge)"/><text x="229" y="197">Spray foam</text>
+        </svg>
+          <figcaption>Foam on part of the sill plate only. The rest can still be inspected.</figcaption></figure>
+      </div>
+    </article>
+    <article class="kf" id="ko-stucco">
+      <header><h3>Stucco below grade</h3><p class="rule">Knockout when the stucco goes below the ground next to the house.</p><p>Stucco that stops above the soil, with foundation showing between the stucco and the ground, is not a knockout.</p></header>
+      <div class="kf-pair">
+        <figure><span class="verdict-tag ko">Knockout</span>
+        <svg class="dg" viewBox="0 0 320 210" role="img" aria-label="Stucco extending below grade">
+          <defs><marker id="ab2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--stop)"/></marker></defs>
+          <text x="76" y="18" text-anchor="middle" class="em">Outside</text>
+          <text x="250" y="18" text-anchor="middle" class="em">Inside</text>
+          <rect x="164" y="30" width="30" height="86" fill="var(--wood)" stroke="var(--wood-edge)"/>
+          <text x="202" y="76">Wall framing</text>
+          <rect x="158" y="116" width="42" height="80" fill="var(--concrete)" stroke="var(--concrete-edge)"/>
+          <text x="208" y="160">Foundation</text>
+          <rect x="0" y="142" width="158" height="54" fill="var(--soil)"/>
+          <circle cx="3" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="17" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="31" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="45" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="59" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="73" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="87" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="101" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="115" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="129" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="143" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="7" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="21" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="35" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="49" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="63" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="77" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="91" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="105" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="119" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="133" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="147" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="3" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="17" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="31" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="45" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="59" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="73" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="87" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="101" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="115" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="129" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="143" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="7" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="21" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="35" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="49" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="63" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="77" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="91" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="105" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="119" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="133" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="147" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="3" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="17" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="31" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="45" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="59" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="73" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="87" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="101" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="115" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="129" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="143" cy="188" r="1.4" fill="var(--soil-dot)"/>
+          <path d="M0,142 H158" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="6" y="208">Soil (top edge is the grade line)</text>
+          <rect x="152" y="30" width="12" height="112" fill="var(--stucco)" stroke="var(--stucco-edge)"/><rect x="152" y="142" width="12" height="54" fill="var(--stucco)" stroke="var(--stop)" stroke-width="1.5" stroke-dasharray="4 3"/><text x="140" y="100" text-anchor="end" class="bad">Stucco runs</text><text x="140" y="115" text-anchor="end" class="bad">below the soil</text><path d="M143,112 Q150,128 156,150" fill="none" stroke="var(--stop)" stroke-width="1.5" marker-end="url(#ab2)"/>
+          <text x="146" y="50" text-anchor="end">Stucco</text>
+        </svg>
+          <figcaption>Stucco continues into the soil, hiding anything that comes up behind it.</figcaption></figure>
+        <figure><span class="verdict-tag ok">Not a knockout</span>
+        <svg class="dg" viewBox="0 0 320 210" role="img" aria-label="Stucco ending above grade">
+          <defs><marker id="ag" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker></defs>
+          <text x="76" y="18" text-anchor="middle" class="em">Outside</text>
+          <text x="250" y="18" text-anchor="middle" class="em">Inside</text>
+          <rect x="164" y="30" width="30" height="86" fill="var(--wood)" stroke="var(--wood-edge)"/>
+          <text x="202" y="76">Wall framing</text>
+          <rect x="158" y="116" width="42" height="80" fill="var(--concrete)" stroke="var(--concrete-edge)"/>
+          <text x="208" y="160">Foundation</text>
+          <rect x="0" y="142" width="158" height="54" fill="var(--soil)"/>
+          <circle cx="3" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="17" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="31" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="45" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="59" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="73" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="87" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="101" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="115" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="129" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="143" cy="148" r="1.4" fill="var(--soil-dot)"/><circle cx="7" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="21" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="35" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="49" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="63" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="77" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="91" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="105" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="119" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="133" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="147" cy="158" r="1.4" fill="var(--soil-dot)"/><circle cx="3" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="17" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="31" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="45" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="59" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="73" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="87" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="101" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="115" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="129" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="143" cy="168" r="1.4" fill="var(--soil-dot)"/><circle cx="7" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="21" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="35" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="49" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="63" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="77" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="91" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="105" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="119" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="133" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="147" cy="178" r="1.4" fill="var(--soil-dot)"/><circle cx="3" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="17" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="31" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="45" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="59" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="73" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="87" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="101" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="115" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="129" cy="188" r="1.4" fill="var(--soil-dot)"/><circle cx="143" cy="188" r="1.4" fill="var(--soil-dot)"/>
+          <path d="M0,142 H158" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="6" y="208">Soil (top edge is the grade line)</text>
+          <rect x="152" y="30" width="12" height="86" fill="var(--stucco)" stroke="var(--stucco-edge)"/><path d="M148,116 H166" stroke="var(--ink)" stroke-width="2"/><path class="dim-good" d="M140,119 V139" marker-start="url(#ag)" marker-end="url(#ag)"/><text x="130" y="124" text-anchor="end" class="good">Gap: foundation</text><text x="130" y="138" text-anchor="end" class="good">visible above soil</text>
+          <text x="146" y="50" text-anchor="end">Stucco</text>
+        </svg>
+          <figcaption>Stucco stops above the soil line, leaving a visible gap.</figcaption></figure>
+      </div>
+    </article>
+    <article class="kf" id="ko-roof">
+      <header><h3>Flat roof</h3><p class="rule">A flat roof is a knockout.</p></header>
+      <div class="kf-pair">
+        <figure><span class="verdict-tag ko">Knockout</span>
+        <svg class="dg" viewBox="0 0 320 210" role="img" aria-label="House with a flat roof">
+          <rect x="72" y="86" width="176" height="14" fill="var(--roof)"/><rect x="72" y="78" width="6" height="10" fill="var(--roof)"/><rect x="242" y="78" width="6" height="10" fill="var(--roof)"/><text x="160" y="64" text-anchor="middle" class="bad">Flat roof</text><rect x="80" y="100" width="160" height="90" fill="var(--house)" stroke="var(--house-edge)"/><rect x="102" y="122" width="30" height="26" fill="var(--bg)" stroke="var(--house-edge)"/><rect x="188" y="122" width="30" height="26" fill="var(--bg)" stroke="var(--house-edge)"/><rect x="145" y="142" width="30" height="48" fill="var(--bg)" stroke="var(--house-edge)"/><path d="M30,190 H290" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="160" y="206" text-anchor="middle">Front of the house</text>
+        </svg>
+          <figcaption>Flat roof.</figcaption></figure>
+        <figure><span class="verdict-tag ok">Not a knockout</span>
+        <svg class="dg" viewBox="0 0 320 210" role="img" aria-label="House with a sloped roof">
+          <path d="M66,102 L160,40 L254,102 Z" fill="var(--roof)"/><text x="160" y="28" text-anchor="middle" class="good">Sloped (pitched) roof</text><rect x="80" y="100" width="160" height="90" fill="var(--house)" stroke="var(--house-edge)"/><rect x="102" y="122" width="30" height="26" fill="var(--bg)" stroke="var(--house-edge)"/><rect x="188" y="122" width="30" height="26" fill="var(--bg)" stroke="var(--house-edge)"/><rect x="145" y="142" width="30" height="48" fill="var(--bg)" stroke="var(--house-edge)"/><path d="M30,190 H290" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="160" y="206" text-anchor="middle">Front of the house</text>
+        </svg>
+          <figcaption>Sloped roof. Not a knockout on its own.</figcaption></figure>
+      </div>
+    </article>
+    <article class="kf" id="ko-crawl">
+      <header><h3>Crawlspace under 18 in.</h3><p class="rule">Knockout when access to the crawlspace is less than 18 in.</p><p>Measure from the ground to the bottom of the floor joists.</p></header>
+      <div class="kf-pair">
+        <figure><span class="verdict-tag ko">Knockout</span>
+        <svg class="dg" viewBox="0 0 320 210" role="img" aria-label="Crawlspace with less than 18 inches of clearance">
+          <defs><marker id="ab" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--stop)"/></marker></defs>
+          <text x="160" y="18" text-anchor="middle" class="em">Crawlspace, side view</text>
+          <rect x="40" y="116" width="240" height="8" fill="var(--wood)" stroke="var(--wood-edge)"/>
+          <text x="160" y="110" text-anchor="middle">Floor and floor joists</text>
+          <rect x="52" y="124" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="78" y="124" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="104" y="124" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="130" y="124" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="156" y="124" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="182" y="124" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="208" y="124" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="234" y="124" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="260" y="124" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/>
+          <rect x="24" y="116" width="16" height="64" fill="var(--concrete)" stroke="var(--concrete-edge)"/>
+          <rect x="280" y="116" width="16" height="64" fill="var(--concrete)" stroke="var(--concrete-edge)"/>
+          <rect x="40" y="180" width="240" height="14" fill="var(--soil)"/>
+          <circle cx="43" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="55" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="67" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="79" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="91" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="103" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="115" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="127" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="139" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="151" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="163" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="175" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="187" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="199" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="211" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="223" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="235" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="247" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="259" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="271" cy="186" r="1.4" fill="var(--soil-dot)"/>
+          <path d="M24,180 H296" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="160" y="208" text-anchor="middle">Ground</text>
+          <path class="dim-bad" d="M160,143 V177" marker-start="url(#ab)" marker-end="url(#ab)"/>
+          <text x="172" y="164.0" class="bad">Under 18 in.</text>
+        </svg>
+          <figcaption>Under 18 in.: mark it as a knockout.</figcaption></figure>
+        <figure><span class="verdict-tag ok">Not a knockout</span>
+        <svg class="dg" viewBox="0 0 320 210" role="img" aria-label="Crawlspace with 18 inches or more of clearance">
+          <defs><marker id="ag2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker></defs>
+          <text x="160" y="18" text-anchor="middle" class="em">Crawlspace, side view</text>
+          <rect x="40" y="60" width="240" height="8" fill="var(--wood)" stroke="var(--wood-edge)"/>
+          <text x="160" y="54" text-anchor="middle">Floor and floor joists</text>
+          <rect x="52" y="68" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="78" y="68" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="104" y="68" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="130" y="68" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="156" y="68" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="182" y="68" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="208" y="68" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="234" y="68" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/><rect x="260" y="68" width="10" height="16" fill="var(--wood)" stroke="var(--wood-edge)"/>
+          <rect x="24" y="60" width="16" height="120" fill="var(--concrete)" stroke="var(--concrete-edge)"/>
+          <rect x="280" y="60" width="16" height="120" fill="var(--concrete)" stroke="var(--concrete-edge)"/>
+          <rect x="40" y="180" width="240" height="14" fill="var(--soil)"/>
+          <circle cx="43" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="55" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="67" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="79" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="91" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="103" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="115" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="127" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="139" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="151" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="163" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="175" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="187" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="199" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="211" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="223" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="235" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="247" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="259" cy="186" r="1.4" fill="var(--soil-dot)"/><circle cx="271" cy="186" r="1.4" fill="var(--soil-dot)"/>
+          <path d="M24,180 H296" stroke="var(--ink)" stroke-width="1.5"/>
+          <text x="160" y="208" text-anchor="middle">Ground</text>
+          <path class="dim-good" d="M160,87 V177" marker-start="url(#ag2)" marker-end="url(#ag2)"/>
+          <text x="172" y="136.0" class="good">18 in. or more</text>
+        </svg>
+          <figcaption>18 in. or more: not a knockout.</figcaption></figure>
+      </div>
+    </article>
   </div>
-  <div class="ko">
-    <div class="ko-item"><span class="sev stop">Stop</span><div class="body"><h3>Live termites or active infestation</h3><p>Live workers, soldiers or swarmers, or tubes that are rebuilt after you break them. Report as active evidence and recommend treatment. No clean letter.</p></div></div>
-    <div class="ko-item"><span class="sev stop">Stop</span><div class="body"><h3>Visible evidence without a treatment record</h3><p>Tubes, damage or frass with no proof of a prior treatment. Report the evidence and recommend treatment even if it looks old.</p></div></div>
-    <div class="ko-item"><span class="sev stop">Stop</span><div class="body"><h3>Structural damage to load-bearing members</h3><p>Sills, joists, beams or posts that are hollowed, crushed or sagging. Recommend evaluation by a qualified contractor or engineer. Do not estimate strength yourself.</p></div></div>
-    <div class="ko-item"><span class="sev flag">Flag</span><div class="body"><h3>Rigid foam or EIFS below grade</h3><p>Termites tunnel through foam out of sight. Many companies will not warranty the structure until it is cut back and an inspection gap is left.</p></div></div>
-    <div class="ko-item"><span class="sev flag">Flag</span><div class="body"><h3>Wood-to-soil contact</h3><p>Framing, posts, steps or siding touching soil. Record it as a conducive condition and recommend correction.</p></div></div>
-    <div class="ko-item"><span class="sev flag">Flag</span><div class="body"><h3>Excess moisture in framing</h3><p>Readings above about 20% in structural wood, standing water, or a failed vapor barrier. Find the source before calling it insect damage alone.</p></div></div>
-    <div class="ko-item"><span class="sev flag">Flag</span><div class="body"><h3>Earth-filled porches and slab additions</h3><p>Filled porches, stoops and additions give hidden entry into the house. Often need drilling and treatment before any warranty.</p></div></div>
-    <div class="ko-item"><span class="sev limit">Limit</span><div class="body"><h3>Inaccessible or obstructed areas</h3><p>Crawlspace with less than 18 in. clearance, finished basement walls, stored items, floor coverings or locked rooms. List each area on the report.</p></div></div>
-    <div class="ko-item"><span class="sev limit">Limit</span><div class="body"><h3>Weather or site conditions</h3><p>Snow cover, standing water in the crawl, or unsafe conditions such as live wiring, animals or sewage. Note them and offer a re-inspection.</p></div></div>
+
+  <h3>Other findings to note</h3>
+  <p class="muted">General inspection practice, not part of the knockout list.</p>
+  <div class="other">
+    <div class="ko-item"><span class="sev stop">Report</span><div class="body"><h3>Live termites or active infestation</h3><p>Live workers, soldiers or swarmers, or tubes that are rebuilt after you break them. Report as active evidence and recommend treatment.</p></div></div>
+    <div class="ko-item"><span class="sev stop">Report</span><div class="body"><h3>Structural damage to load-bearing members</h3><p>Sills, joists, beams or posts that are hollowed, crushed or sagging. Recommend evaluation by a qualified contractor or engineer.</p></div></div>
+    <div class="ko-item"><span class="sev flag">Note</span><div class="body"><h3>Wood-to-soil contact</h3><p>Framing, posts, steps or siding touching soil. Record it as a conducive condition and recommend correction.</p></div></div>
+    <div class="ko-item"><span class="sev flag">Note</span><div class="body"><h3>Excess moisture in framing</h3><p>Standing water, active leaks or a failed vapor barrier. Find the source before calling it insect damage alone.</p></div></div>
+    <div class="ko-item"><span class="sev limit">Limit</span><div class="body"><h3>Inaccessible or obstructed areas</h3><p>Finished basement walls, stored items, floor coverings or locked rooms. List each area on the report.</p></div></div>
   </div>
 </section>
 

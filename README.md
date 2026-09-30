@@ -6,8 +6,11 @@ A field reference for wood-destroying insect (WDI) inspectors, served as one pub
   with a note on what to look for.
 - **Side by side** — termites vs. carpenter ants, termites vs. rot, and carpenter ants vs.
   rot, each with the top three differences.
-- **Field ID guide** comparing the damage types side by side, **questions to ask** the
-  homeowner, **knockout factors**, and an **FAQ**.
+- **Knockout factors** — the company's knockout list (spray foam on the sill plate, stucco
+  below grade, flat roof, crawlspace under 18 in.), each with a diagram of what is and
+  isn't a knockout.
+- **Field ID guide** comparing the damage types, **questions to ask** the homeowner, and
+  an **FAQ**.
 
 The site is private: visitors enter a shared access code before they can see anything.
 No accounts, no database and no API keys.
@@ -45,6 +48,13 @@ e.g. `Photo: Jane Doe, CC BY-SA 4.0`. Only use photos you own or whose license a
 on a public site.
 
 Wood-boring beetles are covered in the field ID table but don't have a photo section yet.
+
+## Editing the knockout factors
+
+Each knockout factor is an `<article class="kf">` in the "Knockout factors" section of
+`public/field-kit.html`, with the rule text and two inline SVG diagrams ("Knockout" and
+"Not a knockout"). To add one, copy an existing article and change the text; a photo can
+go in place of a diagram as an `<img src="/gallery/...">`.
 
 ## Editing the content
 
