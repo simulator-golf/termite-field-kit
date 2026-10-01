@@ -146,6 +146,12 @@ tbody th{font-weight:600;font-size:13px;color:var(--ink-2);width:130px}
 .dg text.good{fill:var(--accent);font-weight:600}
 .dg .dim-bad{stroke:var(--stop);stroke-width:2;fill:none}
 .dg .dim-good{stroke:var(--accent);stroke-width:2;fill:none}
+.kf h4{margin:0;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+.kf-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.kf-photos figure{margin:0;display:grid;gap:8px;align-content:start}
+.kf-photos .frame{aspect-ratio:4/3;border-radius:8px;overflow:hidden;background:var(--sunk);border-top:3px solid var(--c,var(--stop));max-width:100%}
+.kf-photos img{width:100%;height:100%;object-fit:cover;display:block}
+.kf-photos figcaption{display:grid;gap:6px;font-size:13.5px;color:var(--ink-2)}
 .other{display:grid;gap:10px}
 .ko-item{display:grid;grid-template-columns:108px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
 @media (max-width:520px){.ko-item{grid-template-columns:1fr;gap:8px}}
@@ -470,6 +476,16 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
     </article>
     <article class="kf" id="ko-stucco">
       <header><h3>Stucco below grade</h3><p class="rule">Knockout when the stucco goes below the ground next to the house.</p><p>Stucco that stops above the soil, with foundation showing between the stucco and the ground, is not a knockout.</p></header>
+      <h4>Real examples</h4>
+      <div class="kf-photos">
+        <figure><div class="frame"><img src="/gallery/stucco-below-grade-1.jpg" alt="Stucco runs straight down into the grass, with no gap at the bottom." loading="lazy" style="object-position:center"></div>
+          <figcaption><span class="verdict-tag ko">Knockout</span>Stucco runs straight down into the grass, with no gap at the bottom.</figcaption></figure>
+        <figure><div class="frame"><img src="/gallery/stucco-below-grade-2.jpg" alt="Close-up: the base of the stucco sits in the soil. No foundation shows above the ground." loading="lazy" style="object-position:center 70%"></div>
+          <figcaption><span class="verdict-tag ko">Knockout</span>Close-up: the base of the stucco sits in the soil. No foundation shows above the ground.</figcaption></figure>
+        <figure><div class="frame"><img src="/gallery/stucco-below-grade-3.jpg" alt="Stucco broken away at the base, showing it ran down to the soil against the foundation." loading="lazy" style="object-position:center"></div>
+          <figcaption><span class="verdict-tag ko">Knockout</span>Stucco broken away at the base, showing it ran down to the soil against the foundation.</figcaption></figure>
+      </div>
+      <h4>How to tell</h4>
       <div class="kf-pair">
         <figure><span class="verdict-tag ko">Knockout</span>
         <svg class="dg" viewBox="0 0 320 210" role="img" aria-label="Stucco extending below grade">
