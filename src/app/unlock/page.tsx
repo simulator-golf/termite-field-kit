@@ -3,7 +3,7 @@ import { accessCode, safeNext } from "@/lib/access";
 import "./unlock.css";
 
 export const metadata: Metadata = {
-  title: "WDI Field Kit",
+  title: "Termite Expert Reference Guide",
   robots: { index: false, follow: false },
 };
 
@@ -23,7 +23,7 @@ export default async function UnlockPage({ searchParams }: PageProps<"/unlock">)
     <main className="unlock">
       <form className="card" method="post" action="/api/unlock">
         <span className="eyebrow">Wood-destroying insect inspection · field reference</span>
-        <h1>WDI Field Kit</h1>
+        <h1>Termite Expert Reference Guide</h1>
         <p className="lede">This reference is private. Enter the access code you were given.</p>
         <label htmlFor="code">Access code</label>
         <input
@@ -40,7 +40,7 @@ export default async function UnlockPage({ searchParams }: PageProps<"/unlock">)
             {error}
           </p>
         )}
-        <button type="submit">Open the field kit</button>
+        <button type="submit">Open the guide</button>
       </form>
     </main>
   );

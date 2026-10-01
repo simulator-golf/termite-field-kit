@@ -1,4 +1,4 @@
-# Termite Field Kit
+# Termite Expert Reference Guide
 
 A field reference for wood-destroying insect (WDI) inspectors, served as one public page:
 
