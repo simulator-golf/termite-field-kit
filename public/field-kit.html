@@ -136,6 +136,7 @@ tbody th{font-weight:600;font-size:13px;color:var(--ink-2);width:130px}
 @media (max-width:640px){.kf-pair{grid-template-columns:1fr}}
 .kf-pair figure{margin:0;display:grid;gap:8px;align-content:start;border:1px solid var(--line);border-radius:8px;padding:12px;background:var(--bg)}
 .kf-pair figcaption{font-size:13.5px;color:var(--ink-2)}
+.kf-note{font-size:14px;color:var(--ink-2);max-width:75ch}
 .verdict-tag{justify-self:start;font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:4px}
 .verdict-tag.ko{background:var(--stop-soft);color:var(--stop)}
 .verdict-tag.ok{background:var(--accent-soft);color:var(--accent)}
@@ -152,6 +153,8 @@ tbody th{font-weight:600;font-size:13px;color:var(--ink-2);width:130px}
 .kf-photos .frame{aspect-ratio:4/3;border-radius:8px;overflow:hidden;background:var(--sunk);border-top:3px solid var(--c,var(--stop));max-width:100%}
 .kf-photos img{width:100%;height:100%;object-fit:cover;display:block}
 .kf-photos figcaption{display:grid;gap:6px;font-size:13.5px;color:var(--ink-2)}
+.verdict-tag.ex{background:var(--sunk);color:var(--ink-2)}
+.kf .callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 12px;border-radius:0 6px 6px 0;font-size:14.5px}
 .other{display:grid;gap:10px}
 .ko-item{display:grid;grid-template-columns:108px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
 @media (max-width:520px){.ko-item{grid-template-columns:1fr;gap:8px}}
@@ -446,7 +449,16 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
   </nav>
   <div class="kfs">
     <article class="kf" id="ko-foam">
-      <header><h3>Spray foam on the sill plate</h3><p class="rule">Knockout when spray foam insulation in the basement covers the sill plate all the way around.</p><p>If foam covers only a portion of the sill plate, it is not a knockout.</p></header>
+      <header><h3>Spray foam on the sill plate</h3><p class="rule">Knockout when spray foam insulation in the basement covers the sill plate all the way around.</p><p class="callout"><strong>Not a knockout:</strong> if spray foam is only in <strong>part</strong> of the basement, covering only <strong>part</strong> of the sill plate, it is not a knockout factor.</p></header>
+      <h4>Real examples</h4>
+      <div class="kf-photos">
+        <figure><div class="frame" style="--c:var(--line)"><img src="/gallery/spray-foam-sill-closeup.jpg" alt="Close-up of spray foam filling the space between joists and covering the sill plate." loading="lazy" style="object-position:center 55%"></div>
+          <figcaption><span class="verdict-tag ex">What it looks like</span>Close-up of spray foam filling the space between joists and covering the sill plate.</figcaption></figure>
+        <figure><div class="frame" style="--c:var(--line)"><img src="/gallery/spray-foam-sill-wall.jpg" alt="Spray foam along the top of a block foundation wall, covering the sill plate between the joists." loading="lazy" style="object-position:center"></div>
+          <figcaption><span class="verdict-tag ex">What it looks like</span>Spray foam along the top of a block foundation wall, covering the sill plate between the joists.</figcaption></figure>
+      </div>
+      <p class="kf-note">Whether these are a knockout depends on how far the foam goes. Check the whole basement: foam on the sill plate <strong>all the way around</strong> is a knockout; foam on <strong>part</strong> of it is not.</p>
+      <h4>How to tell</h4>
       <div class="kf-pair">
         <figure><span class="verdict-tag ko">Knockout</span>
         <svg class="dg" viewBox="0 0 320 210" role="img" aria-label="Spray foam over the entire sill plate">
@@ -471,7 +483,7 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
           <rect x="120" y="188" width="14" height="10" fill="var(--wood)"/><text x="139" y="197">Sill plate</text>
           <rect x="210" y="188" width="14" height="10" fill="var(--foam)" stroke="var(--foam-edge)"/><text x="229" y="197">Spray foam</text>
         </svg>
-          <figcaption>Foam on part of the sill plate only. The rest can still be inspected.</figcaption></figure>
+          <figcaption>Foam in part of the basement, covering only part of the sill plate. Not a knockout.</figcaption></figure>
       </div>
     </article>
     <article class="kf" id="ko-stucco">
