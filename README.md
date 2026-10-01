@@ -7,7 +7,8 @@ A field reference for wood-destroying insect (WDI) inspectors, served as one pub
 - **Side by side** — termites vs. carpenter ants, termites vs. rot, and carpenter ants vs.
   rot, each with the top three differences.
 - **Knockout factors** — the company's knockout list (spray foam on the sill plate, stucco
-  below grade, flat roof, crawlspace under 18 in.), each with a diagram of what is and
+  below grade, flat roof, crawlspace under 18 in., zero lot line), each with photos and a
+  diagram of what is and
   isn't a knockout.
 - **Field ID guide** comparing the damage types, **questions to ask** the homeowner, and
   an **FAQ**.
