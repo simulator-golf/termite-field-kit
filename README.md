@@ -1,6 +1,6 @@
 # Termite Expert Reference Guide
 
-A field reference for wood-destroying insect (WDI) inspectors, served as one public page:
+A field reference for termite inspectors, served as one page:
 
 - **Damage photos** — example photos of termite, carpenter ant and wood rot damage, each
   with a note on what to look for.

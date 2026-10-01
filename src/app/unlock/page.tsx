@@ -22,7 +22,7 @@ export default async function UnlockPage({ searchParams }: PageProps<"/unlock">)
   return (
     <main className="unlock">
       <form className="card" method="post" action="/api/unlock">
-        <span className="eyebrow">Wood-destroying insect inspection · field reference</span>
+        <span className="eyebrow">Termite inspection · field reference</span>
         <h1>Termite Expert Reference Guide</h1>
         <p className="lede">This reference is private. Enter the access code you were given.</p>
         <label htmlFor="code">Access code</label>
