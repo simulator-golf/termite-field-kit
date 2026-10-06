@@ -10,6 +10,8 @@ A field reference for termite inspectors, served as one page:
   below grade, flat roof, crawlspace under 18 in., zero lot line), each with photos and a
   diagram of what is and
   isn't a knockout.
+- **Filling out the contract** — where to fill out the contract and how to fill it out,
+  with spots for step-by-step screenshots (in progress).
 - **Field ID guide** comparing the damage types, **questions to ask** the homeowner, and
   an **FAQ**.
 

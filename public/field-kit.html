@@ -166,6 +166,28 @@ tbody th{font-weight:600;font-size:13px;color:var(--ink-2);width:130px}
 .ko-item p{font-size:14px}
 .ko-item .body{display:grid;gap:4px}
 
+/* Contract */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:st}
+.step{counter-increment:st;display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+@media (max-width:640px){.step{grid-template-columns:1fr}}
+.step .txt{display:grid;gap:6px;align-content:start}
+.step h3{font-size:19px;display:flex;gap:10px;align-items:baseline}
+.step h3::before{content:counter(st);font-family:var(--f-mono);font-size:13px;color:var(--accent-ink);background:var(--accent);border-radius:999px;min-width:24px;height:24px;display:inline-grid;place-items:center}
+.step p{font-size:14.5px}
+.shot-slot{aspect-ratio:4/3;max-width:100%;border:1.5px dashed var(--line);border-radius:8px;background:var(--sunk);display:grid;place-items:center;text-align:center;padding:12px;font-family:var(--f-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-2)}
+.pending{font-size:13.5px;color:var(--ink-2);font-style:italic}
+.fields{border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
+.fields .frow{display:grid;grid-template-columns:200px minmax(0,1fr);gap:14px;padding:12px 16px;border-top:1px solid var(--line)}
+.fields .frow:first-child{border-top:0}
+@media (max-width:560px){.fields .frow{grid-template-columns:1fr;gap:4px}}
+.fields .fname{font-weight:600;font-size:14.5px}
+.fields .fhow{font-size:14.5px;display:grid;gap:4px}
+.fields .fhow .watch{color:var(--warn);font-size:13.5px}
+.checklist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.checklist li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:14.5px;align-items:start}
+.checklist li::before{content:"";width:16px;height:16px;margin-top:3px;border:2px solid var(--accent);border-radius:4px}
+.draft-tag{justify-self:start;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:var(--warn-soft);color:var(--warn)}
+
 /* FAQ */
 .faq{display:grid;gap:8px}
 details{background:var(--surface);border:1px solid var(--line);border-radius:10px}
@@ -197,6 +219,7 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
     <a href="#id">Field ID</a>
     <a href="#questions">Questions to ask</a>
     <a href="#knockouts">Knockout factors</a>
+    <a href="#contract">Contract</a>
     <a href="#faq">FAQ</a>
   </div>
 </nav>
@@ -646,6 +669,54 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
     <div class="ko-item"><span class="sev flag">Note</span><div class="body"><h3>Excess moisture in framing</h3><p>Standing water, active leaks or a failed vapor barrier. Find the source before calling it insect damage alone.</p></div></div>
     <div class="ko-item"><span class="sev limit">Limit</span><div class="body"><h3>Inaccessible or obstructed areas</h3><p>Finished basement walls, stored items, floor coverings or locked rooms. Note each area you couldn't inspect.</p></div></div>
   </div>
+</section>
+
+<!-- CONTRACT -->
+<section class="block" id="contract">
+  <div class="head">
+    <span class="eyebrow">Paperwork</span>
+    <h2>Filling out the contract</h2>
+    <p class="muted">Where to find the contract and how to fill it out correctly. Screenshots of each step are coming.</p>
+  </div>
+
+  <h3>Where to fill it out</h3>
+  <ol class="steps">
+      <li class="step">
+        <div class="txt"><h3>Open the contract</h3><p class="pending">Where to find the contract and how to open it. Details coming soon.</p></div>
+        <div class="shot-slot">Screenshot coming soon</div>
+      </li>
+      <li class="step">
+        <div class="txt"><h3>Start a new contract for the customer</h3><p class="pending">How to start a new contract and attach it to the right customer. Details coming soon.</p></div>
+        <div class="shot-slot">Screenshot coming soon</div>
+      </li>
+      <li class="step">
+        <div class="txt"><h3>Submit and send the customer a copy</h3><p class="pending">How to submit the finished contract and make sure the customer gets a copy. Details coming soon.</p></div>
+        <div class="shot-slot">Screenshot coming soon</div>
+      </li>
+  </ol>
+
+  <h3>How to fill it out</h3>
+  <span class="draft-tag">Draft: to be confirmed</span>
+  <p class="muted">What goes in each part of the contract. This is a starting list and will be updated to match the actual contract.</p>
+  <div class="fields">
+        <div class="frow"><div class="fname">Customer name</div><div class="fhow"><span>Full name of the homeowner who is signing.</span><span class="watch">Watch for: Spell it the way the customer spells it. Ask if unsure.</span></div></div>
+        <div class="frow"><div class="fname">Property address</div><div class="fhow"><span>Street, unit number, city, state and ZIP of the home being treated.</span><span class="watch">Watch for: Make sure it's the treated property, not the customer's mailing address if different.</span></div></div>
+        <div class="frow"><div class="fname">Phone and email</div><div class="fhow"><span>A number and email the customer actually checks.</span></div></div>
+        <div class="frow"><div class="fname">Service and price</div><div class="fhow"><span>The service being sold and the agreed price.</span><span class="watch">Watch for: Double-check the price matches what you quoted.</span></div></div>
+        <div class="frow"><div class="fname">Knockout factors and notes</div><div class="fhow"><span>Anything from the knockout list, plus areas you couldn't inspect.</span><span class="watch">Watch for: Write it on the contract so it's on record before work starts.</span></div></div>
+        <div class="frow"><div class="fname">Signatures and date</div><div class="fhow"><span>Customer and inspector both sign and date.</span><span class="watch">Watch for: No blank signature lines.</span></div></div>
+  </div>
+
+  <h3>Before you submit</h3>
+  <span class="draft-tag">Draft: to be confirmed</span>
+  <ul class="checklist">
+    <li>Every field is filled in. Nothing left blank.</li>
+    <li>Name, address and phone match what the customer told you.</li>
+    <li>Service and price match what you quoted.</li>
+    <li>Any knockout factors and areas you couldn't inspect are written down.</li>
+    <li>Customer and inspector have both signed and dated it.</li>
+    <li>The customer has a copy.</li>
+  </ul>
 </section>
 
 <!-- FAQ -->
