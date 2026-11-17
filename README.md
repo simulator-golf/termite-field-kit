@@ -2,6 +2,8 @@
 
 A field reference for termite inspectors, served as one page:
 
+- **Pitch** — the CJ Termite Pitch, step by step from the door to the termite education
+  talk, with the lines to say highlighted.
 - **Damage photos** — example photos of termite, carpenter ant and wood rot damage, each
   with a note on what to look for.
 - **Side by side** — termites vs. carpenter ants, termites vs. rot, and carpenter ants vs.

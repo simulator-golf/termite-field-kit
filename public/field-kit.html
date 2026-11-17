@@ -63,6 +63,21 @@ nav.tabs a:focus-visible,button:focus-visible,input:focus-visible,select:focus-v
 section.block{padding-block:40px 8px;display:grid;grid-template-columns:minmax(0,1fr);gap:18px;scroll-margin-top:60px}
 section.block > .head{display:grid;gap:6px;max-width:70ch}
 
+/* Pitch */
+.phases{display:grid;gap:16px}
+.phase{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:14px;scroll-margin-top:70px}
+.phase > header{display:grid;gap:4px}
+.phase > header h3{font-size:24px}
+.beat{display:grid;gap:8px;border-top:1px solid var(--line);padding-top:12px;max-width:80ch}
+.beat h4{margin:0;font-size:15px;font-weight:600}
+.beat p,.beat li{font-size:15px}
+.beat ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.say{margin:0;display:grid;gap:8px;background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 14px}
+.say::before{content:"Say";font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.say p,.say li{font-size:15.5px;line-height:1.55}
+.say ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.say .label{font-weight:600}
+
 /* Gallery */
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:14px}
 .actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
@@ -214,6 +229,7 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
 
 <nav class="tabs" aria-label="Sections">
   <div class="wrap">
+    <a href="#pitch">Pitch</a>
     <a href="#gallery">Damage photos</a>
     <a href="#side-by-side">Side by side</a>
     <a href="#id">Field ID</a>
@@ -225,6 +241,96 @@ footer{padding-block:40px 48px;font-size:13px;color:var(--ink-2);max-width:75ch}
 </nav>
 
 <main class="wrap">
+
+<!-- PITCH -->
+<section class="block" id="pitch">
+  <div class="head">
+    <span class="eyebrow">Step-by-step field guide</span>
+    <h2>CJ Termite Pitch</h2>
+    <p class="muted">Follow these steps in order, from the door to the conversation about termites. Lines in the green boxes are what to say.</p>
+  </div>
+  <nav class="jump" aria-label="Pitch phases">
+    <a href="#pitch-1" style="--c:var(--accent)"><span class="dot"></span>Phase 1: Approach and entry</a>
+    <a href="#pitch-2" style="--c:var(--accent)"><span class="dot"></span>Phase 2: Inspection</a>
+    <a href="#pitch-3" style="--c:var(--accent)"><span class="dot"></span>Phase 3: Education</a>
+  </nav>
+  <div class="phases">
+
+    <article class="phase" id="pitch-1">
+      <header><span class="eyebrow">Phase 1</span><h3>The Approach &amp; Entry</h3></header>
+      <div class="beat">
+        <h4>Pre-knock inspection</h4>
+        <p>Before knocking, scan the exterior for signs of existing treatment (cement plugs or bait stations).</p>
+      </div>
+      <div class="beat">
+        <h4>The greeting</h4>
+        <blockquote class="say"><p>“Hello, my name is CJ; I’m your termite inspector for today. Do you mind if I step inside?”</p></blockquote>
+      </div>
+      <div class="beat">
+        <h4>The setup (once inside)</h4>
+        <blockquote class="say">
+          <p>“Perfect. Have you ever had a termite inspection with us before? Obviously, the reason we do this is to ensure you don’t have any termites.</p>
+          <ul>
+            <li><span class="label">Inside the home:</span> I’ll be sweeping the baseboards and looking for ‘late indication’ signs—evidence that they’ve already started eating the structure.</li>
+            <li><span class="label">Outside the home:</span> I’ll be looking for ‘early indication’ signs on the property. These help us catch termites before they do significant damage to the home.</li>
+          </ul>
+          <p>If I find any of these signs, I’ll come back and talk to you about treatment options, okay? Do you have any questions for me?”</p>
+        </blockquote>
+      </div>
+      <div class="beat">
+        <h4>Discovery questions</h4>
+        <blockquote class="say"><ul>
+          <li>“Does the home have any history of termites?”</li>
+          <li>“When did you purchase the home?”</li>
+          <li>“When was the home built?”</li>
+        </ul></blockquote>
+      </div>
+    </article>
+
+    <article class="phase" id="pitch-2">
+      <header><span class="eyebrow">Phase 2</span><h3>The Interior &amp; Exterior Inspection</h3></header>
+      <div class="beat">
+        <h4>Inside</h4>
+        <p>Look for baseboard warping, paint bubbles, and pinholes in the wall.</p>
+      </div>
+      <div class="beat">
+        <h4>The transition</h4>
+        <blockquote class="say"><p>“I’m all done on the inside and heading out to the perimeter. If I see anything concerning, I’ll come back and knock so we can talk about treatment. Any questions before I go?”</p></blockquote>
+      </div>
+      <div class="beat">
+        <h4>Outside (the search)</h4>
+        <p>Check under every paver, through mulch, at every tree, and along the fence.</p>
+      </div>
+      <div class="beat">
+        <h4>Documentation</h4>
+        <p>When you find signs, record a video. Start at the damage and pan up to the house to show the customer how close the threat is.</p>
+      </div>
+    </article>
+
+    <article class="phase" id="pitch-3">
+      <header><span class="eyebrow">Phase 3</span><h3>The “Bread &amp; Butter” (Education)</h3></header>
+      <div class="beat">
+        <h4>The re-entry</h4>
+        <p>Knock again. When they answer, ask:</p>
+        <blockquote class="say"><p>“Do you have a second so we can talk?”</p></blockquote>
+      </div>
+      <div class="beat">
+        <h4>The hook</h4>
+        <p>Regardless of what they ask, respond with:</p>
+        <blockquote class="say"><p>“How much do you know about termites?”</p></blockquote>
+      </div>
+      <div class="beat">
+        <h4>The three critical facts</h4>
+        <blockquote class="say"><ul>
+          <li><span class="label">Subterranean:</span> “They live underground. They don’t live in the house or the stump; they just eat that wood and bring it back down to the colony.”</li>
+          <li><span class="label">Inside-out:</span> “They eat wood from the inside out. You won’t know they are there until you see the damage; it’s very rare to see the actual bug.”</li>
+          <li><span class="label">Colony size:</span> “An ant colony is about 300,000. A termite colony can reach 3 million. Do you have any questions about that?”</li>
+        </ul></blockquote>
+      </div>
+    </article>
+
+  </div>
+</section>
 
 <!-- GALLERY -->
 <section class="block" id="gallery">
