@@ -3,7 +3,7 @@
 A field reference for termite inspectors, served as one page:
 
 - **Pitch** — the CJ Termite Pitch, step by step from the door to the termite education
-  talk, with the lines to say highlighted.
+  talk, with the lines to say highlighted, followed by the questions to ask the homeowner.
 - **Damage photos** — example photos of termite, carpenter ant and wood rot damage, each
   with a note on what to look for.
 - **Side by side** — termites vs. carpenter ants, termites vs. rot, and carpenter ants vs.
@@ -14,7 +14,7 @@ A field reference for termite inspectors, served as one page:
   isn't a knockout.
 - **Filling out the contract** — where to fill out the contract and how to fill it out,
   with spots for step-by-step screenshots (in progress).
-- **Field ID guide** comparing the damage types, **questions to ask** the homeowner, and
+- **Field ID guide** comparing the damage types, and
   an **FAQ**.
 
 The site is private: visitors enter a shared access code before they can see anything.
